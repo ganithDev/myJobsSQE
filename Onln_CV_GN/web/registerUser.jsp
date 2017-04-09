@@ -10,7 +10,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <!-- Load jQuery and the validate plugin -->
 
+        <script src="/Onln_CV_GN/jquerylbs/jquery-19.1.js"></script>
+        <script src="/Onln_CV_GN/jquerylbs/jquery.validate.min.js"></script>
         <!-- jQuery Form Validation code -->
         <script>
 
