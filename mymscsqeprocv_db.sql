@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 09, 2017 at 09:03 AM
+-- Generation Time: Apr 12, 2017 at 04:51 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -32,14 +32,14 @@ CREATE TABLE `educational_qualification` (
   `courseName` varchar(100) NOT NULL COMMENT ' e.g. Biology with Computing, Business Studies - using auto-complete\n',
   `idEducationLevel` smallint(3) UNSIGNED NOT NULL,
   `otherEducationLevel` varchar(45) DEFAULT NULL,
-  `vocational` bit(1) DEFAULT NULL COMMENT '1 if vocational, 0 if academic\nnull if not sure?  Not sure this is needed.',
+  `vocational` tinyint(1) DEFAULT NULL COMMENT '1 if vocational, 0 if academic\nnull if not sure?  Not sure this is needed.',
   `mainSubject` varchar(45) DEFAULT NULL COMMENT 'e.g. Computer Science, Mechanical Engineering - auto-compelete from subjects-lookup\n',
   `nameOfInstitution` varchar(100) DEFAULT NULL COMMENT 'school, college, university',
   `country` varchar(45) DEFAULT NULL COMMENT 'where qualification gained - auto-lookup or drop-down may be useful',
   `yearObtained` date DEFAULT NULL COMMENT 'year, may be months as well?',
   `result` varchar(20) DEFAULT NULL COMMENT 'e.g. A grade, PASS, 2nd Class Hons, Distinction - where appropriate',
   `thesesTitle` varchar(200) DEFAULT NULL COMMENT 'when approapriate, e.g.final year BSc project title',
-  `verified` bit(1) DEFAULT NULL COMMENT 'if checked',
+  `verified` tinyint(1) DEFAULT NULL COMMENT 'if checked',
   `howVerified` varchar(45) DEFAULT NULL COMMENT 'who checked and how',
   `idPerson` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='post 16 Academic and Vocational - not Professional';
@@ -106,7 +106,7 @@ CREATE TABLE `experience` (
   `otherJobTitle` varchar(45) DEFAULT NULL COMMENT 'in case a suitable job-title is not found in the drop-down from the job_titles table',
   `keyDuties` varchar(255) DEFAULT NULL COMMENT 'this could be searchable by keywork search!?',
   `employerName` varchar(45) DEFAULT NULL,
-  `verified` bit(1) DEFAULT NULL,
+  `verified` tinyint(1) DEFAULT NULL,
   `howVerified` varchar(45) DEFAULT NULL,
   `idLevelOfEmployment` smallint(4) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='work experience';
@@ -159,7 +159,7 @@ INSERT INTO `job_title` (`idJobTitle`, `jobTitle`, `Sector_idSector`) VALUES
 
 CREATE TABLE `person` (
   `idPerson` int(10) UNSIGNED NOT NULL,
-  `dUser` int(11) UNSIGNED NOT NULL,
+  `idUser` int(11) UNSIGNED NOT NULL,
   `title` varchar(10) DEFAULT NULL,
   `forename1` varchar(45) NOT NULL,
   `forename2` varchar(45) DEFAULT NULL,
@@ -171,14 +171,14 @@ CREATE TABLE `person` (
   `secondEmail` varchar(50) DEFAULT NULL COMMENT 'alternative email to be used if any problem with the username (primary email)\n',
   `personalUrl` varchar(64) DEFAULT NULL COMMENT 'increasingly common',
   `photo` text COMMENT 'to be uploaded by the user',
-  `female` bit(1) DEFAULT NULL COMMENT 'need to check whether there could be legal  issues collecting/using this info\n',
+  `female` tinyint(1) DEFAULT NULL COMMENT 'need to check whether there could be legal  issues collecting/using this info\n',
   `postcodeStart` varchar(10) DEFAULT NULL COMMENT 'first part of the the persons address postcode for distance calculation',
   `authorityToWorkStatement` varchar(255) DEFAULT NULL COMMENT 'List restrictions on work, e.g. max 20 hours per week (some non-EU residents)\nE.g. if not null it should be displayed',
   `contactPreference` enum('Mobile','Landline','Email1','Email2') DEFAULT NULL COMMENT 'mobile\nlandline\nemail1 (username)\nemail2 (secondEmail)',
   `noOfGcses` smallint(3) UNSIGNED DEFAULT '0',
   `gcseEnglishGrade` varchar(2) DEFAULT NULL,
   `gcseMathsGrade` varchar(2) DEFAULT NULL,
-  `fiveOrMoreGcses` bit(1) DEFAULT NULL,
+  `fiveOrMoreGcses` tinyint(1) DEFAULT NULL,
   `noOfAlevels` smallint(4) DEFAULT '0' COMMENT 'entered by the user - could be checked against the number in the Alevels table.\nAS level is 0.5.  What about International Baccalaureate, French Baccalaureate,European Baccalaureate,Scottish Highers etc...',
   `ucasPoints` smallint(4) DEFAULT '0' COMMENT 'needed?',
   `studentStatus` enum('Full-time','Part-time','Not a student') DEFAULT NULL COMMENT 'if a student then the details of the course should be stored in the Educational_qualifications table',
@@ -188,6 +188,13 @@ CREATE TABLE `person` (
   `penaltyPoints` smallint(4) DEFAULT NULL COMMENT 'on the UK driving license - see http://www.direct.gov.uk/en/Motoring/DriverLicensing/EndorsementsAndDisqualifications/DG_4022550',
   `idLevelOfEmployment` smallint(4) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `person`
+--
+
+INSERT INTO `person` (`idPerson`, `idUser`, `title`, `forename1`, `forename2`, `surname`, `addressLine1`, `addressLine2`, `town`, `postcode`, `secondEmail`, `personalUrl`, `photo`, `female`, `postcodeStart`, `authorityToWorkStatement`, `contactPreference`, `noOfGcses`, `gcseEnglishGrade`, `gcseMathsGrade`, `fiveOrMoreGcses`, `noOfAlevels`, `ucasPoints`, `studentStatus`, `mobile`, `landline`, `dob`, `penaltyPoints`, `idLevelOfEmployment`) VALUES
+(1, 1, 'Mrs', 'ganith', 'dithula', 'perera', '71, 1 lane', 'Katubadde', 'Moratuwa', '10400', 'gani@ya.com', 'null', 'SKLL0274_EDT.JPG', 0, 'SL', 'authorityToWorkStatement', 'Mobile', 5, 'A', 'B', 0, 2, 10, 'Full-time', '0712281744', '0112587744', '1991-09-21', 11, 1);
 
 -- --------------------------------------------------------
 
@@ -202,7 +209,7 @@ CREATE TABLE `professional_qualification` (
   `awardingBody` varchar(45) DEFAULT NULL COMMENT 'if appropriate - e.g. institute of chartered surveyors',
   `yearObtained` date DEFAULT NULL,
   `classification` varchar(20) DEFAULT NULL COMMENT 'if appropriate - some prof qualification may have classifications - e.g. the legal practice certificate: distinctinction, commendation, pass',
-  `verified` bit(1) DEFAULT NULL,
+  `verified` tinyint(1) DEFAULT NULL,
   `howVerified` varchar(45) DEFAULT NULL COMMENT 'e.g. examining certificates or lists of members of professional bodies',
   `idPerson` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -222,11 +229,11 @@ CREATE TABLE `referee` (
   `email` varchar(50) DEFAULT NULL,
   `contactPhone` varchar(16) DEFAULT NULL,
   `relationship` enum('employer','academic') DEFAULT NULL,
-  `permissionToContact` bit(1) DEFAULT NULL COMMENT 'the person should get an agreement and tick this box to overwrite the default 0',
-  `permissionToStoreDetail` bit(1) DEFAULT NULL COMMENT 'person should try to get an agreement and check - otherwise the record will be deleted',
-  `verified` bit(1) DEFAULT NULL,
+  `permissionToContact` tinyint(1) DEFAULT NULL COMMENT 'the person should get an agreement and tick this box to overwrite the default 0',
+  `permissionToStoreDetail` tinyint(1) DEFAULT NULL COMMENT 'person should try to get an agreement and check - otherwise the record will be deleted',
+  `verified` tinyint(1) DEFAULT NULL,
   `howVerified` varchar(45) DEFAULT NULL COMMENT 'referee contacted by email/phone/letter',
-  `referenceDoc` blob COMMENT 'uploaded scanned reference?'
+  `referenceDoc` text COMMENT 'uploaded scanned reference?'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='need to check data protection for referee data';
 
 -- --------------------------------------------------------
@@ -294,7 +301,7 @@ CREATE TABLE `skill_person` (
   `idPerson` int(10) UNSIGNED NOT NULL,
   `idSkill` int(10) UNSIGNED NOT NULL,
   `skillLevel` enum('Basic','Good','Excellent') DEFAULT NULL COMMENT 'subjective - but may be crossreferenced to to ER tests',
-  `verified` bit(1) DEFAULT NULL,
+  `verified` tinyint(1) DEFAULT NULL,
   `howVerified` varchar(45) DEFAULT NULL COMMENT 'reference, ER test or other evidence of competence'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -311,6 +318,13 @@ CREATE TABLE `user` (
   `registerDate` timestamp NULL DEFAULT NULL,
   `idUser_type` smallint(3) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`idUser`, `username`, `password`, `registerDate`, `idUser_type`) VALUES
+(1, 'ganithperera@outlook.com', '123456', '2017-04-12 15:27:12', 1);
 
 -- --------------------------------------------------------
 
@@ -330,7 +344,8 @@ CREATE TABLE `user_type` (
 INSERT INTO `user_type` (`idUser_type`, `user_type`) VALUES
 (1, 'JobSeeker'),
 (2, 'Agency'),
-(3, 'Admin');
+(3, 'Admin'),
+(4, 'other');
 
 --
 -- Indexes for dumped tables
@@ -386,7 +401,7 @@ ALTER TABLE `job_title`
 ALTER TABLE `person`
   ADD PRIMARY KEY (`idPerson`),
   ADD KEY `fk_person_employment_level1_idx` (`idLevelOfEmployment`),
-  ADD KEY `fk_person_user1_idx` (`dUser`);
+  ADD KEY `fk_person_user1_idx` (`idUser`);
 
 --
 -- Indexes for table `professional_qualification`
@@ -475,7 +490,7 @@ ALTER TABLE `job_title`
 -- AUTO_INCREMENT for table `person`
 --
 ALTER TABLE `person`
-  MODIFY `idPerson` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `idPerson` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `professional_qualification`
 --
@@ -502,10 +517,15 @@ ALTER TABLE `skill`
 ALTER TABLE `skill_person`
   MODIFY `idSkill_person` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `idUser` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
 -- AUTO_INCREMENT for table `user_type`
 --
 ALTER TABLE `user_type`
-  MODIFY `idUser_type` smallint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idUser_type` smallint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- Constraints for dumped tables
 --
@@ -543,7 +563,7 @@ ALTER TABLE `job_title`
 --
 ALTER TABLE `person`
   ADD CONSTRAINT `fk_person_employment_level1` FOREIGN KEY (`idLevelOfEmployment`) REFERENCES `employment_level` (`idLevelOfEmployment`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_person_user1` FOREIGN KEY (`dUser`) REFERENCES `user` (`idUser`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_person_user1` FOREIGN KEY (`idUser`) REFERENCES `user` (`idUser`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `professional_qualification`
