@@ -16,10 +16,10 @@ public class DBConnection {
  private static String className = "com.mysql.jdbc.Driver";
     private static String driverURL = "jdbc:mysql://localhost:3306/mymscsqeprocv_db";
     private static String dbUsername = "root";
-    private static String dbPassword = "";
+    private static String dbPassword = "1234";
     
     
-    public static Connection getConnection(){
+    public static Connection getDBConnection(){
         
         // Declare SQL Connection
     
