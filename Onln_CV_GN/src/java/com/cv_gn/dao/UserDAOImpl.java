@@ -20,16 +20,22 @@ import org.apache.catalina.User;
  * @author Naduni Pulsarani
  */
 public class UserDAOImpl {
+     private static PreparedStatement pstmt1;
+     private static Connection conn;
+
+    public static void main(String[] args) {
+        new UserDAOImpl().addEmployee();
+    }
 
     public String addEmployee(User user) {
 
-        // OPen Database Connection 
-        Connection conn = DBConnection.getConnection();
+        // Open Database Connection 
+        conn = DBConnection.getDBConnection();
 
         if (conn != null) { // Check Connection Object
             String checkExistQuery = "select * from employee where username='" + user.getUsername() + "'";
 
-            PreparedStatement pstmt1;
+           
             try {
                 pstmt1 = conn.prepareStatement(checkExistQuery);
 
@@ -38,9 +44,9 @@ public class UserDAOImpl {
                 if (!rs.next()) {
 
                     String insertQuery = "INSERT INTO employee(first_name,last_name,address,contact_number,gender,email_address,username,password,user_status,user_type) VALUES(?,?,?,?,?,?,?,?,'1',?)";
-                    PreparedStatement psmt = conn.prepareStatement(insertQuery);
+                    PreparedStatement psmt1 = conn.prepareStatement(insertQuery);
 
-                  /*  psmt.setString(1, employee.getFirstName());
+                    /*  psmt.setString(1, employee.getFirstName());
                     psmt.setString(2, employee.getLastName());
                     psmt.setString(3, employee.getAddress());
                     psmt.setInt(4, employee.getContactNumber());
@@ -50,9 +56,9 @@ public class UserDAOImpl {
                     psmt.setString(8, employee.getPassword());
 
                     psmt.setString(9, employee.getUserType());
-                  */
+                     */
                     // Execute SQL Query
-                    int status = psmt.executeUpdate();
+                    int status = pstmt1.executeUpdate();
 
                     if (status == 1) {
 
@@ -82,6 +88,36 @@ public class UserDAOImpl {
         } else { // Connection Object is Null
             return Onln_CV_GNConstant.ERROR;
         }
+
+    }
+
+    private void addEmployee() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public String getUserID(String username) {
+        String userID="",userIDQuery="";
+         try {
+             
+             // Open Database Connection
+             conn = DBConnection.getDBConnection();
+             
+             
+             if (conn != null) { // Check Connection Object
+                 userIDQuery= "select * from user where username='" + username + "'";
+                 pstmt1 = conn.prepareStatement(userIDQuery);
+                 ResultSet rs = pstmt1.executeQuery();
+                 while (rs.next()) {
+                     userID=rs.getString(1);                     
+                 }
+             }else { // Connection Object is Null
+                 return Onln_CV_GNConstant.ERROR;
+             }
+             return userID;
+         } catch (SQLException ex) {
+             Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+         }
+         return userID;
 
     }
 

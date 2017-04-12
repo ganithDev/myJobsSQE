@@ -32,12 +32,14 @@
                         town: {required: true},
                         postcode: {required: true},
                         secondemail: {required: true, email: true},
-                        personalurl: {required: true},
-                        photo: {required: true},
+                       // personalurl: {required: true},
+                       // photo: {required: true},
                         studentstatus: {required: true},
                         mobile: {required: true, minlength: 10, number: true},
-                        landline: {required: true, minlength: 10, number: true},
+                       // landline: {required: true, minlength: 10, number: true},
                         dob: {required: true},
+                        userEmail:{required: true,email: true},
+                        password:{required: true,minlength: 6},
                         agree: "required"
                     },
                     // Specify the validation error messages
@@ -52,9 +54,11 @@
                         secondemail: {required: "Please enter a valid email address"},
                         photo: {required: "Please select your photo"},
                         studentstatus: {required: "Student Staus required"},
-                        mobile: {required: "Mobile No required"},
+                        mobile: {required: "Mobile required"},
                         landline: {required: "Land Line required"},
                         dob: {required: "Date of Birth required"},
+                        userEmail:{required: "Enter valid email for your username"},
+                        password:{required: "Filed "},
                         agree: "Please accept our policy"
 
                     },
@@ -90,22 +94,22 @@
                     </tr>
                     <tr>
                         <td>First Name</td>
-                        <td><input type="text" name="firstname" id ="firstname" value="" /></td>
+                        <td><input type="text" name="firstName" id ="firstname" value="" /></td>
                     </tr>
                     <tr>
                         <td>Second Name</td>
-                        <td><input type="text" name="secondname" id="secondname" value="" /></td>
+                        <td><input type="text" name="secondName" id="secondname" value="" /></td>
                     </tr>
                     <tr>
                         <td>Sur Name</td>
-                        <td><input type="text" name="surname" id="surname"  value="" /></td>
+                        <td><input type="text" name="surName" id="surname"  value="" /></td>
                     </tr>
                     <tr>
-                        <td>Address 1</td>
+                        <td>Address line 1</td>
                         <td><input type="text" name="address1" id="address1" value="" /></td>
                     </tr>
                     <tr>
-                        <td>Address 2</td>
+                        <td>Address line 2</td>
                         <td><input type="text" name="address2" id="address2" value="" /></td>
                     </tr>
                     <tr>
@@ -118,11 +122,11 @@
                     </tr>
                     <tr>
                         <td>Second Email</td>
-                        <td><input type="text" name="secondemail" id ="secondemail" value="" /></td>
+                        <td><input type="email" name="secondEmail" id ="secondemail" value="" /></td>
                     </tr>
                     <tr>
                         <td>Personal URL</td>
-                        <td><input type="text" name="personalurl" id="personalurl" value="" /></td>
+                        <td><input type="url" name="personalurl" id="personalUrl" value="" /></td>
                     </tr>
                     <tr>
                         <td>Photo</td>
@@ -130,20 +134,40 @@
                     </tr>
                     <tr>
                         <td>Student Status</td>
-                        <td><input type="text" name="studentstatus" id="studentstatus" value="" /></td>
+                        <td><input type="text" name="studentStatus" id="studentstatus" value="" /></td>
                     </tr>
                     <tr>
                         <td>Mobile</td>
-                        <td><input type="text" name="mobile" id="mobile" value="" size="10" /></td>
+                        <td><input type="tel" name="mobile" id="mobile" value="" size="10" /></td>
                     </tr>
                     <tr>
                         <td>Land Line</td>
-                        <td><input type="text" name="landline" id="landline" value="" size="10" /></td>
+                        <td><input type="text" name="landLine" id="landline" value="" size="10" /></td>
                     </tr>
                     <tr>
                         <td>Date of Birth</td>
                         <td><input type="date" name="dob" id ="dob" value="" /></td>
                     </tr>
+                     <tr>
+                        <td>Username</td>
+                        <td><input type="email" name="userEmail" id ="userEmail" value="" /></td>
+                    </tr>
+                     <tr>
+                        <td>Password</td>
+                        <td><input type="password" name="password" id ="password" value="" /></td>
+                    </tr>
+                    <%
+                    String msg="";
+                    if(msg.equals("")){
+                       
+                    }else{
+                    %>
+                <div><%=msg%></div>
+                    <%
+                    }
+                    %>
+                   
+                    
 
                 </tbody>
             </table>
