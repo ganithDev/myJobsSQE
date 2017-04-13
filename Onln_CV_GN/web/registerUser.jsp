@@ -74,7 +74,7 @@
 
     </head>
     <body>
-        <h1 align="center">User Registration
+        <h1 align="center">User Registration Page
 
         </h1>
         <form method="POST" action="/Onln_CV_GN/UserRegistrationController?actionType=AddUser" novalidate="novalidate" id="register-form">
