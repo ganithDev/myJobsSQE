@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 12, 2017 at 04:51 PM
+-- Generation Time: Apr 15, 2017 at 03:04 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -194,7 +194,9 @@ CREATE TABLE `person` (
 --
 
 INSERT INTO `person` (`idPerson`, `idUser`, `title`, `forename1`, `forename2`, `surname`, `addressLine1`, `addressLine2`, `town`, `postcode`, `secondEmail`, `personalUrl`, `photo`, `female`, `postcodeStart`, `authorityToWorkStatement`, `contactPreference`, `noOfGcses`, `gcseEnglishGrade`, `gcseMathsGrade`, `fiveOrMoreGcses`, `noOfAlevels`, `ucasPoints`, `studentStatus`, `mobile`, `landline`, `dob`, `penaltyPoints`, `idLevelOfEmployment`) VALUES
-(1, 1, 'Mrs', 'ganith', 'dithula', 'perera', '71, 1 lane', 'Katubadde', 'Moratuwa', '10400', 'gani@ya.com', 'null', 'SKLL0274_EDT.JPG', 0, 'SL', 'authorityToWorkStatement', 'Mobile', 5, 'A', 'B', 0, 2, 10, 'Full-time', '0712281744', '0112587744', '1991-09-21', 11, 1);
+(1, 1, 'Mrs', 'ganith', 'dithula', 'perera', '71, 1 lane', 'Katubadde', 'Moratuwa', '10400', 'gani@ya.com', 'null', 'SKLL0274_EDT.JPG', 0, 'SL', 'authorityToWorkStatement', 'Mobile', 5, 'A', 'B', 0, 2, 10, 'Full-time', '0712281744', '0112587744', '1991-09-21', 11, 1),
+(2, 3, 'Mrs', 'fsd', 'dgdf', 'dgdf', 'dfgdf', 'dgdf', 'dfgd', '10230', 'naduni@kljlj', 'null', 'cat-modern-home-design.jpg', 0, 'SL', 'authorityToWorkStatement', 'Mobile', 5, 'A', 'B', 0, 2, 10, 'Full-time', '0719995375', '0112749145', '1991-02-07', 11, 1),
+(3, 4, 'Mrs', 'Kamal', 'Nisala', 'Perera', '103/1,', 'Colombo 04', 'Bambalapitiy', '10150', 'kamal@gmail.com', 'null', '87573__Interior - New - myname - Design.jpg', 0, 'SL', 'authorityToWorkStatement', 'Mobile', 5, 'A', 'B', 0, 2, 10, 'Full-time', '0718895375', '0112849145', '1991-02-07', 11, 1);
 
 -- --------------------------------------------------------
 
@@ -324,7 +326,10 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`idUser`, `username`, `password`, `registerDate`, `idUser_type`) VALUES
-(1, 'ganithperera@outlook.com', '123456', '2017-04-12 15:27:12', 1);
+(1, 'ganithperera@outlook.com', '123456', '2017-04-12 15:27:12', 1),
+(2, 'naduni@sfsd', 'aaaaaa', '2017-04-15 09:02:53', 1),
+(3, 'naduni@dgfd', 'aaaaaa', '2017-04-15 12:16:13', 1),
+(4, 'kamal@gmail.com', 'aaaaaa', '2017-04-15 13:24:03', 1);
 
 -- --------------------------------------------------------
 
@@ -490,7 +495,7 @@ ALTER TABLE `job_title`
 -- AUTO_INCREMENT for table `person`
 --
 ALTER TABLE `person`
-  MODIFY `idPerson` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idPerson` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `professional_qualification`
 --
@@ -520,7 +525,7 @@ ALTER TABLE `skill_person`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `idUser` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idUser` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `user_type`
 --
