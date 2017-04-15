@@ -187,8 +187,8 @@ public class VectorsJUnit4Test {
         PersonDAOImpl personDAOImpl = new PersonDAOImpl();
 
         String addPerson = new PersonDAOImpl().addPerson(person, user);
-        System.out.println("addPerson : " + addPerson);
-        System.out.println("* VectorsJUnit4Test: equalsCheck()");
+        //System.out.println("addPerson : " + addPerson);
+        //System.out.println("* VectorsJUnit4Test: equalsCheck()");
         String expResult = "exist";
         assertEquals(expResult, addPerson);
 
