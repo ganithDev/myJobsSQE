@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 1, 2017 11:12:08 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.cv_gn.model.PersonTitle" table="person_title" catalog="mymscsqeprocv_db" optimistic-lock="version">
+        <id name="idpersonTitle" type="java.lang.Integer">
+            <column name="idperson_title" />
+            <generator class="identity" />
+        </id>
+        <property name="title" type="string">
+            <column name="title" length="45" />
+        </property>
+        <set name="persons" table="person" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idperson_title" not-null="true" />
+            </key>
+            <one-to-many class="com.cv_gn.model.Person" />
+        </set>
+    </class>
+</hibernate-mapping>

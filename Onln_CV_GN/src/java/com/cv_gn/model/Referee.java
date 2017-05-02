@@ -1,15 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.cv_gn.model;
-
-/**
- *
- * @author Ganith Perera
- */
-// Generated Apr 10, 2017 11:21:51 PM by Hibernate Tools 4.3.1
+// Generated May 1, 2017 11:12:07 PM by Hibernate Tools 4.3.1
 
 
 
@@ -21,12 +11,12 @@ public class Referee  implements java.io.Serializable {
 
      private Integer idReferee;
      private Person person;
+     private RefereeRelationship refereeRelationship;
      private String title;
      private String forename;
      private String surname;
      private String email;
      private String contactPhone;
-     private String relationship;
      private Boolean permissionToContact;
      private Boolean permissionToStoreDetail;
      private Boolean verified;
@@ -37,19 +27,20 @@ public class Referee  implements java.io.Serializable {
     }
 
 	
-    public Referee(Person person, String forename, String surname) {
+    public Referee(Person person, RefereeRelationship refereeRelationship, String forename, String surname) {
         this.person = person;
+        this.refereeRelationship = refereeRelationship;
         this.forename = forename;
         this.surname = surname;
     }
-    public Referee(Person person, String title, String forename, String surname, String email, String contactPhone, String relationship, Boolean permissionToContact, Boolean permissionToStoreDetail, Boolean verified, String howVerified, String referenceDoc) {
+    public Referee(Person person, RefereeRelationship refereeRelationship, String title, String forename, String surname, String email, String contactPhone, Boolean permissionToContact, Boolean permissionToStoreDetail, Boolean verified, String howVerified, String referenceDoc) {
        this.person = person;
+       this.refereeRelationship = refereeRelationship;
        this.title = title;
        this.forename = forename;
        this.surname = surname;
        this.email = email;
        this.contactPhone = contactPhone;
-       this.relationship = relationship;
        this.permissionToContact = permissionToContact;
        this.permissionToStoreDetail = permissionToStoreDetail;
        this.verified = verified;
@@ -70,6 +61,13 @@ public class Referee  implements java.io.Serializable {
     
     public void setPerson(Person person) {
         this.person = person;
+    }
+    public RefereeRelationship getRefereeRelationship() {
+        return this.refereeRelationship;
+    }
+    
+    public void setRefereeRelationship(RefereeRelationship refereeRelationship) {
+        this.refereeRelationship = refereeRelationship;
     }
     public String getTitle() {
         return this.title;
@@ -105,13 +103,6 @@ public class Referee  implements java.io.Serializable {
     
     public void setContactPhone(String contactPhone) {
         this.contactPhone = contactPhone;
-    }
-    public String getRelationship() {
-        return this.relationship;
-    }
-    
-    public void setRelationship(String relationship) {
-        this.relationship = relationship;
     }
     public Boolean getPermissionToContact() {
         return this.permissionToContact;
@@ -153,6 +144,5 @@ public class Referee  implements java.io.Serializable {
 
 
 }
-
 
 

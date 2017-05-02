@@ -5,7 +5,17 @@
  */
 package com.cv_gn.dao;
 
+import com.cv_gn.model.EducationalQualification;
+import com.cv_gn.model.EmploymentLevel;
+import com.cv_gn.model.Experience;
+import com.cv_gn.model.JobPreference;
 import com.cv_gn.model.Person;
+import com.cv_gn.model.PersonContactMode;
+import com.cv_gn.model.PersonStatus;
+import com.cv_gn.model.PersonTitle;
+import com.cv_gn.model.ProfessionalQualification;
+import com.cv_gn.model.Referee;
+import com.cv_gn.model.SkillPerson;
 import com.cv_gn.model.User;
 import com.cv_gn.model.UserType;
 import com.cv_gn.util.DBConnection;
@@ -17,6 +27,7 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,9 +35,14 @@ import java.util.logging.Logger;
  *
  * @author Ganith Perera
  */
-public class PersonDAOImpl {
 
-    public String addPerson(Person p, User user) {
+public class PersonDAOImpl{
+private static PreparedStatement pstmt1=null;
+     private static Connection conn=null;
+     private static PersonDAOImpl pl=null;
+     
+     
+    public String addPerson(User user,Person p,PersonStatus personStatus,PersonTitle personTitle,PersonContactMode pcm) {
         // Open Database Connection 
         Connection conn = DBConnection.getDBConnection();
 
@@ -61,12 +77,12 @@ public class PersonDAOImpl {
                     //Get user ID from the database
                     String userID = new UserDAOImpl().getUserID(user.getUsername());
                     short user_id = Short.parseShort(userID);
-                    String personInsertQry = "INSERT INTO person VALUES('0','" + user_id + "','" + p.getTitle() + "','" + p.getForename1() + "','" + p.getForename2() + "','" + p.getSurname() + "','" + p.getAddressLine1() + "','" + p.getAddressLine2() + "','" + p.getTown() + "','" + p.getPostcode() + "','" + p.getSecondEmail() + "','" + p.getPersonalUrl() + "','" + p.getPhoto() + "','0','" + p.getPostcodeStart() + "','" + p.getAuthorityToWorkStatement() + "','" + p.getContactPreference() + "','" + p.getNoOfGcses() + "','" + p.getGcseEnglishGrade() + "','" + p.getGcseMathsGrade() + "','0','" + p.getNoOfAlevels() + "','" + p.getUcasPoints() + "','" + p.getStudentStatus() + "','" + p.getMobile() + "','" + p.getLandline() + "','" + birthDay + "','" + p.getPenaltyPoints() + "','1')";
+                    String personInsertQry = "INSERT INTO person VALUES('0','" + user_id + "','" + personTitle.getTitle() + "','" + p.getForename1() + "','" + p.getForename2() + "','" + p.getSurname() + "','" + p.getAddressLine1() + "','" + p.getAddressLine2() + "','" + p.getTown() + "','" + p.getPostcode() + "','" + p.getSecondEmail() + "','" + p.getPersonalUrl() + "','" + p.getPhoto() + "','0','" + p.getPostcodeStart() + "','" + p.getAuthorityToWorkStatement() + "','" + pcm.getContactMode() + "','" + p.getNoOfGcses() + "','" + p.getGcseEnglishGrade() + "','" + p.getGcseMathsGrade() + "','0','" + p.getNoOfAlevels() + "','" + p.getUcasPoints() + "','" + personStatus.getPersonStatus() + "','" + p.getMobile() + "','" + p.getLandline() + "','" + birthDay + "','" + p.getPenaltyPoints() + "','1')";
 
                     preparedStatementPerson = conn.prepareStatement(personInsertQry);
                     //Save Person to database
                     int statusPerson = preparedStatementPerson.executeUpdate();
-                    System.out.println("statusPerson=" + statusPerson);
+                    //System.out.println("statusPerson=" + statusPerson);
                     // Check SQL Query status
                     if (statusUser == 1 || statusPerson == 1) {
 
@@ -74,7 +90,7 @@ public class PersonDAOImpl {
                     } else {
                         return Onln_CV_GNConstant.NOT_ADDED;
                     }
-                } else { // Item ID exist
+                } else { // Username exist
                     return Onln_CV_GNConstant.EXIST;
                 }
 
@@ -98,4 +114,75 @@ public class PersonDAOImpl {
         }
 
     }
+    
+       public String getPersonTitleLength() {
+        int titleLength=0;
+        String personTitleQuery="";
+         try {
+             // Open Database Connection
+             conn = DBConnection.getDBConnection();
+             if (conn != null) { // Check Connection Object
+                 personTitleQuery= "SELECT * FROM person_title";
+                 pstmt1 = conn.prepareStatement(personTitleQuery);
+                 ResultSet rs = pstmt1.executeQuery();
+                 while (rs.next()) {
+                     rs.getString(1);  
+                     titleLength++;
+                 }
+             }else { // Connection Object is Null
+                 return Onln_CV_GNConstant.ERROR;
+             }
+             return ""+titleLength;
+         } catch (SQLException ex) {
+             Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+         }
+         return ""+titleLength;
+
+    }
+        public String[] getPersonTitles() {
+            int titleLength= Integer.parseInt(pl.getPersonTitleLength());
+        String[] personTitle=new String[titleLength];
+       pl=new PersonDAOImpl();
+      
+        String personTitleQuery="";
+         try {
+             
+             // Open Database Connection
+             conn = DBConnection.getDBConnection();
+             
+             
+             if (conn != null) { // Check Connection Object
+                 personTitleQuery= "SELECT * FROM person_title";
+                 pstmt1 = conn.prepareStatement(personTitleQuery);
+                 ResultSet rs = pstmt1.executeQuery();
+                 while (rs.next()) {
+                     System.out.println("indxA="+titleLength);
+                   personTitle[titleLength-1]=  rs.getString("title");
+                   
+                     System.out.println("indxB="+titleLength);
+                     titleLength--;
+                 }
+             }else { // Connection Object is Null
+                 //return Onln_CV_GNConstant.ERROR;
+             }
+             return personTitle;
+         } catch (SQLException ex) {
+             Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+         }
+         return personTitle;
+
+    }
+        public static void main(String[] args) {
+         pl=new PersonDAOImpl();
+        String size=pl.getPersonTitleLength();
+            System.out.println("size="+size);
+          String ary[]=pl.getPersonTitles();
+            for (int i = 0; i < ary.length; i++) {
+                System.out.println("val="+ary[i]);
+                
+            }
+    }
+
+    
+   
 }

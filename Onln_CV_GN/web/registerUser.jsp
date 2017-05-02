@@ -4,8 +4,12 @@
     Author     : Naduni Pulsarani
 --%>
 
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+  PersonDAOImpl personDAO=null;
+%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -84,11 +88,9 @@
                     <tr>
                         <td>Title</td>
                         <td><select name="title">
-
+                              
                                 <option value="Mrs">Mrs</option>
-
-
-                                <option value="Mr">Mr</option>
+                              
 
                             </select></td>
                     </tr>

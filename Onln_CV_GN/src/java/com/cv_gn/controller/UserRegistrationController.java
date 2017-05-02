@@ -12,6 +12,9 @@ import com.cv_gn.model.EmploymentLevel;
 import com.cv_gn.model.Experience;
 import com.cv_gn.model.JobPreference;
 import com.cv_gn.model.Person;
+import com.cv_gn.model.PersonContactMode;
+import com.cv_gn.model.PersonStatus;
+import com.cv_gn.model.PersonTitle;
 import com.cv_gn.model.ProfessionalQualification;
 import com.cv_gn.model.Referee;
 import com.cv_gn.model.SkillPerson;
@@ -59,7 +62,7 @@ public class UserRegistrationController extends HttpServlet {
 
             String title = "", firstName = "", secondName = "", surName = "", address1 = "",
                     address2 = "", town = "", postcode = "", secondEmail = "", personalUrl = "", photo = "",
-                    studentStatus = "", mobile = "", landLine = "", dob = "", userEmail = "", password = "";
+                    studentStatus = "", mobile = "", landLine = "", dob = "", userEmail = "", password = "",contactMode = "";
             //initializing the varibales from the values submitted from registerUser
             title = request.getParameter("title");
             firstName = request.getParameter("firstName");
@@ -83,7 +86,8 @@ public class UserRegistrationController extends HttpServlet {
             String postcodeStart = "SL", authorityToWorkStatement = "authorityToWorkStatement", contactPreference = "Mobile", gcseEnglishGrade = "A", gcseMathsGrade = "B";
             //  Short noOfGcses=0, String , String gcseMathsGrade, Boolean fiveOrMoreGcses, Short noOfAlevels, Short ucasPoints, String studentStatus, String mobile, String landline, Date dob, Short penaltyPoints, Set<Referee> referees, Set<SkillPerson> skillPersons, Set<EducationalQualification> educationalQualifications, Set<Experience> experiences, Set<ProfessionalQualification> professionalQualifications, Set<JobPreference> jobPreferences)
 
-            UserType userType = new UserType();
+            
+            UserType userType = new UserType();      
             Set<Referee> referees = new HashSet<Referee>(0);
             Set<SkillPerson> skillPersons = new HashSet<SkillPerson>(0);
             Set<EducationalQualification> educationalQualifications = new HashSet<EducationalQualification>(0);
@@ -91,10 +95,16 @@ public class UserRegistrationController extends HttpServlet {
             Set<ProfessionalQualification> professionalQualifications = new HashSet<ProfessionalQualification>(0);
             Set<JobPreference> jobPreferences = new HashSet<JobPreference>(0);
             EmploymentLevel employmentLevel = new EmploymentLevel();
+            
+            PersonStatus personStatus=new PersonStatus();
+            personStatus.setPersonStatus(studentStatus);
+            PersonTitle personTitle=new PersonTitle();
+            personTitle.setTitle(title);
+            PersonContactMode pcm=new PersonContactMode(contactMode);
 
-            employmentLevel.getIdLevelOfEmployment();
 //Create the User object
-            User user = new User(0, userType, userEmail, password);
+            User user = new User(userType, userEmail, password);
+          
             System.out.println("dob="+dob);
             birthDay = new SimpleDateFormat("yyyy-MM-dd").parse(dob);
             System.out.println("date="+birthDay);
@@ -104,9 +114,16 @@ public class UserRegistrationController extends HttpServlet {
             Short noOfGces=5, ucasPoints=10,noOfAlevels=2,penaltyPoints=11;//Need to define at registration or other approach
             
             //Create the Person object
-            person = new Person(employmentLevel, user, title, firstName, secondName, surName, address1, address2, town, postcode, secondEmail, personalUrl, photo, Boolean.FALSE, postcodeStart, authorityToWorkStatement, contactPreference,noOfGces , gcseEnglishGrade, gcseMathsGrade, Boolean.FALSE, noOfAlevels, ucasPoints, studentStatus, mobile, landLine, birthDay, penaltyPoints, referees, skillPersons, educationalQualifications, experiences, professionalQualifications, jobPreferences);
+            person = new Person(employmentLevel,pcm,personStatus, personTitle,user, firstName, secondName, surName, address1, address2, town, postcode, 
+                    secondEmail, personalUrl, photo, Boolean.FALSE, postcodeStart, authorityToWorkStatement,noOfGces , 
+                    gcseEnglishGrade, gcseMathsGrade, Boolean.FALSE, noOfAlevels, ucasPoints, mobile, landLine, birthDay, 
+                    penaltyPoints, referees, skillPersons, educationalQualifications, experiences, professionalQualifications, 
+                    jobPreferences);
+            
+          
+            
             //Pass person,user objects to addPerson 
-            String addPerson = new PersonDAOImpl().addPerson(person, user);
+            String addPerson = new PersonDAOImpl().addPerson(user,person,personStatus,personTitle,pcm);
             if(addPerson.equals("success")){
             response.sendRedirect("home.jsp");
             }else{
@@ -114,8 +131,8 @@ public class UserRegistrationController extends HttpServlet {
             }
 
             Referee referee1 = null, referee2 = null;
-            referee1 = new Referee(person, "Mr.", "Alex", "Stuart", "alx@yahoo.com", "845784", "employer", Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, "referee contacted by email", "path1");
-            referee2 = new Referee(person, "Mr.", "Ray", "Fernando", "ray@yahoo.com", "878954", "academic", Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, "referee contacted by mobile", "path2");
+           // referee1 = new Referee(person, "Mr.", "Alex", "Stuart", "alx@yahoo.com", "845784", "employer", Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, "referee contacted by email", "path1");
+            ///referee2 = new Referee(person, "Mr.", "Ray", "Fernando", "ray@yahoo.com", "878954", "academic", Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, "referee contacted by mobile", "path2");
         }
     }
 

@@ -1,15 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.cv_gn.model;
-
-/**
- *
- * @author Ganith Perera
- */
-// Generated Apr 10, 2017 11:21:51 PM by Hibernate Tools 4.3.1
+// Generated May 1, 2017 11:12:07 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -72,6 +62,5 @@ public class EmploymentLevel  implements java.io.Serializable {
 
 
 }
-
 
 

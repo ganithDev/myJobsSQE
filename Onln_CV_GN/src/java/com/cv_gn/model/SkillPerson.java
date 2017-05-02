@@ -1,15 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.cv_gn.model;
-
-/**
- *
- * @author Ganith Perera
- */
-// Generated Apr 10, 2017 11:21:51 PM by Hibernate Tools 4.3.1
+// Generated May 1, 2017 11:12:07 PM by Hibernate Tools 4.3.1
 
 
 
@@ -19,10 +9,10 @@ package com.cv_gn.model;
 public class SkillPerson  implements java.io.Serializable {
 
 
-     private Integer idSkillPerson;
+     private int idSkillPerson;
      private Person person;
      private Skill skill;
-     private String skillLevel;
+     private SkillLevel skillLevel;
      private Boolean verified;
      private String howVerified;
 
@@ -30,11 +20,14 @@ public class SkillPerson  implements java.io.Serializable {
     }
 
 	
-    public SkillPerson(Person person, Skill skill) {
+    public SkillPerson(int idSkillPerson, Person person, Skill skill, SkillLevel skillLevel) {
+        this.idSkillPerson = idSkillPerson;
         this.person = person;
         this.skill = skill;
+        this.skillLevel = skillLevel;
     }
-    public SkillPerson(Person person, Skill skill, String skillLevel, Boolean verified, String howVerified) {
+    public SkillPerson(int idSkillPerson, Person person, Skill skill, SkillLevel skillLevel, Boolean verified, String howVerified) {
+       this.idSkillPerson = idSkillPerson;
        this.person = person;
        this.skill = skill;
        this.skillLevel = skillLevel;
@@ -42,11 +35,11 @@ public class SkillPerson  implements java.io.Serializable {
        this.howVerified = howVerified;
     }
    
-    public Integer getIdSkillPerson() {
+    public int getIdSkillPerson() {
         return this.idSkillPerson;
     }
     
-    public void setIdSkillPerson(Integer idSkillPerson) {
+    public void setIdSkillPerson(int idSkillPerson) {
         this.idSkillPerson = idSkillPerson;
     }
     public Person getPerson() {
@@ -63,11 +56,11 @@ public class SkillPerson  implements java.io.Serializable {
     public void setSkill(Skill skill) {
         this.skill = skill;
     }
-    public String getSkillLevel() {
+    public SkillLevel getSkillLevel() {
         return this.skillLevel;
     }
     
-    public void setSkillLevel(String skillLevel) {
+    public void setSkillLevel(SkillLevel skillLevel) {
         this.skillLevel = skillLevel;
     }
     public Boolean getVerified() {

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 1, 2017 11:12:08 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.cv_gn.model.PersonStatus" table="person_status" catalog="mymscsqeprocv_db" optimistic-lock="version">
+        <id name="idpersonStatus" type="java.lang.Integer">
+            <column name="idperson_status" />
+            <generator class="identity" />
+        </id>
+        <property name="personStatus" type="string">
+            <column name="person_status" length="45">
+                <comment>if a student then the details of the course should be stored in the Educational_qualifications table</comment>
+            </column>
+        </property>
+        <set name="persons" table="person" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idperson_status" not-null="true" />
+            </key>
+            <one-to-many class="com.cv_gn.model.Person" />
+        </set>
+    </class>
+</hibernate-mapping>

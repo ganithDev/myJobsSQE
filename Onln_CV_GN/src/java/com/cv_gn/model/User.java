@@ -1,15 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.cv_gn.model;
-
-/**
- *
- * @author Ganith Perera
- */
-// Generated Apr 10, 2017 11:21:51 PM by Hibernate Tools 4.3.1
+// Generated May 1, 2017 11:12:07 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -22,7 +12,7 @@ import java.util.Set;
 public class User  implements java.io.Serializable {
 
 
-     private int idUser;
+     private Integer idUser;
      private UserType userType;
      private String username;
      private String password;
@@ -33,14 +23,12 @@ public class User  implements java.io.Serializable {
     }
 
 	
-    public User(int idUser, UserType userType, String username, String password) {
-        this.idUser = idUser;
+    public User(UserType userType, String username, String password) {
         this.userType = userType;
         this.username = username;
         this.password = password;
     }
-    public User(int idUser, UserType userType, String username, String password, Date registerDate, Set<Person> persons) {
-       this.idUser = idUser;
+    public User(UserType userType, String username, String password, Date registerDate, Set<Person> persons) {
        this.userType = userType;
        this.username = username;
        this.password = password;
@@ -48,11 +36,11 @@ public class User  implements java.io.Serializable {
        this.persons = persons;
     }
    
-    public int getIdUser() {
+    public Integer getIdUser() {
         return this.idUser;
     }
     
-    public void setIdUser(int idUser) {
+    public void setIdUser(Integer idUser) {
         this.idUser = idUser;
     }
     public UserType getUserType() {
@@ -95,6 +83,5 @@ public class User  implements java.io.Serializable {
 
 
 }
-
 
 

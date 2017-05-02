@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 1, 2017 11:12:08 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.cv_gn.model.SkillPerson" table="skill_person" catalog="mymscsqeprocv_db" optimistic-lock="version">
+        <id name="idSkillPerson" type="int">
+            <column name="idSkill_person" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="person" class="com.cv_gn.model.Person" fetch="select">
+            <column name="idPerson" not-null="true" />
+        </many-to-one>
+        <many-to-one name="skill" class="com.cv_gn.model.Skill" fetch="select">
+            <column name="idSkill" not-null="true" />
+        </many-to-one>
+        <many-to-one name="skillLevel" class="com.cv_gn.model.SkillLevel" fetch="select">
+            <column name="idskill_level" not-null="true" />
+        </many-to-one>
+        <property name="verified" type="java.lang.Boolean">
+            <column name="verified" />
+        </property>
+        <property name="howVerified" type="string">
+            <column name="howVerified" length="45">
+                <comment>reference, ER test or other evidence of competence</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

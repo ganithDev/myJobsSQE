@@ -1,22 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.cv_gn.model;
-
-/**
- *
- * @author Ganith Perera
- */
-// Generated Apr 10, 2017 11:21:51 PM by Hibernate Tools 4.3.1
+// Generated May 1, 2017 11:12:07 PM by Hibernate Tools 4.3.1
 
 
-import com.cv_gn.util.DBConnection;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -29,12 +14,8 @@ public class UserType  implements java.io.Serializable {
      private Short idUserType;
      private String userType;
      private Set<User> users = new HashSet<User>(0);
-     private static PreparedStatement preparedStatement=null;
-     
-             
 
     public UserType() {
-         
     }
 
 	
@@ -46,23 +27,14 @@ public class UserType  implements java.io.Serializable {
        this.users = users;
     }
    
-    public Short getIdUserType() {        
-        return this.idUserType;
-    }
-     public Short getIdUserType(int iduser_type, Connection con) throws SQLException {
-       
-         String idUserTypeQry = "select iduser_type from user_type where user_type='" + iduser_type+ "'";
-         preparedStatement=con.prepareStatement(idUserTypeQry);
-         ResultSet rs=preparedStatement.executeQuery();
-         idUserType=(short)rs.getInt(1);
+    public Short getIdUserType() {
         return this.idUserType;
     }
     
-    public void setIdUserType(Short idUserType) {        
+    public void setIdUserType(Short idUserType) {
         this.idUserType = idUserType;
     }
     public String getUserType() {
-        
         return this.userType;
     }
     
@@ -81,6 +53,5 @@ public class UserType  implements java.io.Serializable {
 
 
 }
-
 
 
