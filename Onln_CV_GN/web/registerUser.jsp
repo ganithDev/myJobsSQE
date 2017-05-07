@@ -20,9 +20,16 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <!-- Load jQuery and the validate plugin -->
 
+
+        <title>Registration Form | RecruitMe</title>
+
+        <link rel="stylesheet" type="text/css" href="CSS_styl/Top_Foot.css"><!--Used for form design-->
+        <link rel="stylesheet" type="text/css" href="CSS_styl/demo.css"><!--Used for form design-->
+        <link rel="stylesheet" type="text/css" href="CSS_styl/style3.css"><!--Used for form design-->
+        <link rel="stylesheet" type="text/css" href="CSS_styl/gridLayouts.css"><!--Used for grid layouts-->
+
+        <!-- Load jQuery and the validate plugin -->
         <script src="/Onln_CV_GN/jquerylbs/jquery-19.1.js"></script>
         <script src="/Onln_CV_GN/jquerylbs/jquery.validate.min.js"></script>
         <!-- jQuery Form Validation code -->
@@ -63,7 +70,7 @@
                         town: {required: "Town required"},
                         postcode: {required: "Postcode required"},
                         secondemail: {required: "Please enter a valid email address"},
-                       // photo: {required: "Please select your photo"},
+                        // photo: {required: "Please select your photo"},
                         studentstatus: {required: "Student Staus required"},
                         mobile: {required: "Mobile required"},
                         landline: {required: "Land Line required"},
@@ -82,152 +89,212 @@
 
         </script>
         <!-- End jQuery Form Validation code -->
-
+        <%@include file="Header_RecruitMe.html" %>
     </head>
     <body>
-        <h1 align="center">User Registration Page
 
-        </h1>
-        <form method="POST" action="/Onln_CV_GN/UserRegistrationController?actionType=AddUser" novalidate="novalidate" id="register-form">
-            <table border="0" align="center">
+        <!-- Corps -->
+        <form method="POST" action="UserRegistrationController?actionType=AddUser" novalidate id="register-form" autocomplete="on">
+            <section>				
+                <div id="container_demo"><!--Contain design related to form-->
 
-                <tbody>
-                    <tr>
-                        <td>Title</td>
-                        <td><select name="title">
-                                <%
-                                         
-                                    List<PersonTitle> ptsList = ManagerDAO.searchAll(new PersonTitle());
-                                    for (PersonTitle pt : ptsList) {
-                                %>
-                                <option value="<%= pt.getIdpersonTitle()%>"><%= pt.getTitle()%></option>
-                                <%}%>
+                    <div id="wrapper"><!--Contain design related to form-->
 
-                            </select></td>
-                    </tr>
-                    <tr>
-                        <td>First Name</td>
-                        <td><input type="text" name="firstName" id ="firstname" value="" /></td>
-                    </tr>
-                    <tr>
-                        <td>Second Name</td>
-                        <td><input type="text" name="secondName" id="secondname" value="" /></td>
-                    </tr>
-                    <tr>
-                        <td>Sur Name</td>
-                        <td><input type="text" name="surName" id="surname"  value="" /></td>
-                    </tr>
-                    <tr>
-                        <td>Date of Birth</td>
-                        <td><input type="date" name="dob" id ="dob" value="" /></td>
-                    </tr>
-                    <tr>
-                        <td>Address line 1</td>
-                        <td><input type="text" name="addressLine1" id="address1" value="" /></td>
-                    </tr>
-                    <tr>
-                        <td>Address line 2</td>
-                        <td><input type="text" name="addressLine2" id="address2" value="" /></td>
-                    </tr>
-                    <tr>
-                        <td>Town</td>
-                        <td><input type="text" name="town" id ="town" value="" /></td>
-                    </tr>
-                    <tr>
-                        <td>Post Code</td>
-                        <td><input type="text" name="postcode" id ="postcode" value="" /></td>
-                    </tr>
-                    
-                    <tr>
-                        <td>Username(Primary Email)</td>
-                        <td><input type="email" name="userEmail" id ="userEmail" value="" /></td>
-                    </tr>
-                    <tr>
-                        <td>Password</td>
-                        <td><input type="password" name="password" id ="password" value="" /></td>
-                    </tr>
-                    <tr>
-                        <td>Second Email</td>
-                        <td><input type="email" name="secondEmail" id ="secondemail" value="" /></td>
-                    </tr>
-                    <tr>
-                        <td>Personal URL</td>
-                        <td><input type="url" name="personalurl" id="personalUrl" value="" /></td>
-                    </tr>
-                    <tr>
-                        <td>Photo</td>
-                        <td><input type="file" name="photo" id="photo" value="" /></td>
-                    </tr>
-                    <tr>
-                        <td>Select your Status</td>
-                        <td><select name="studentStatus">
-                                <%
-                                    List<PersonStatus> listPs = ManagerDAO.searchAll(new PersonStatus());
-                                    for (PersonStatus personStatus : listPs) {
-                                %>
-                                <option value="<%= personStatus.getIdpersonStatus()%>"><%= personStatus.getPersonStatus()%></option>
-                                <%}%>
 
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Mobile</td>
-                        <td><input type="tel" name="mobile" id="mobile" value="" size="10" /></td>
-                    </tr>
-                    <tr>
-                        <td>Land Line</td>
-                        <td><input type="text" name="landLine" id="landline" value="" size="10" /></td>
-                    </tr>
-                       <tr>
-                        <td>Select Preferred Contact Mode</td>
-                        <td><select name="preferredContactMode">
-                                <%
-                                    List<PersonContactMode> listPcm = ManagerDAO.searchAll(new PersonContactMode());
-                                    for (PersonContactMode pcm : listPcm) {
-                                %>
-                                <option value="<%=pcm.getIdcontactPreference() %>"><%=pcm.getContactMode()%></option>
-                                <%}%>
+                        <div id="register" class="animate form"> <!--Contain design related to form-->
+                            <section role="main" class="container_16 clearfix"><!--Contain design related to two grids-->
+                                <h1> User Registration</h1> 
+                                <div class="grid_16">
+                                    <!-- Left grid -->
+                                    <div class="grid_8 apropos">
 
-                            </select>
-                        </td>
-                    </tr>
-                      <tr>
-                        <td>Select your current Employment Level</td>
-                        <td><select name="employmentLevel">
-                                <%
-                                    List<EmploymentLevel> listEmp = ManagerDAO.searchAll(new EmploymentLevel());
-                                    for (EmploymentLevel el : listEmp) {
-                                %>
-                                <option value="<%=el.getIdLevelOfEmployment() %>"><%=el.getEmploymentLevel()%></option>
-                                <%}%>
+                                        <p> 
 
-                            </select>
-                        </td>
-                    </tr>
-                    
-                    
-                    <%
-                        String msg = "";
-                        if (msg.equals("")) {
+                                            <label for="firstName" class="uname" data-icon="u"> First Name</label>
+                                           <select name="title" required type="text" placeholder="--Select--">
+                                                <%
+                                                    List<PersonTitle> ptsList = ManagerDAO.searchAll(new PersonTitle());
+                                                    for (PersonTitle pt : ptsList) {
+                                                %>
+                                                <option value="<%= pt.getIdpersonTitle()%>"><%= pt.getTitle()%></option>
+                                                <%}%>
 
-                        } else {
-                    %>
-                <div><%=msg%></div>
-                <%
-                    }
-                %>
+                                            </select> <input id="firstname" name="firstName" required type="text" placeholder="John">
+                                        </p>
+                                        <p> 
+                                            <label for="surName" class="uname" data-icon="s"> Sur Name</label>
+                                            <input id="surname" name="surName" required type="text" placeholder="Smith">
+                                        </p>
+                                        <p> 
+                                            <label for="addressLine1" class="uname" data-icon="a2"> Address Line 1</label>
+                                            <input id="address1" name="addressLine1" required type="text" placeholder="103, Royal Residence">
+                                        </p>
+                                        <p> 
+                                            <label for="town" class="uname" data-icon="t">   Town</label>
+                                            <input id="town" name="town" required type="text" placeholder="Smith">
+                                        </p>
+                                        <p> 
+                                            <label for="secondEmail" class="uname" data-icon="e">  Secondary Email</label>
+                                            <input id="secondemail" name="secondEmail" required type="email" placeholder="Smith">
+                                        </p>
+
+
+                                        <p> 
+                                            <label for="mobile" class="uname" data-icon="t">   Mobile</label>
+                                            <input id="mobile" name="mobile" required type="tel" placeholder="Smith">
+                                        </p>
+                                        <p> 
+                                            <label for="landLine" class="uname" data-icon="t">   Land Line</label>
+                                            <input id="mobile" name="landLine" type="tel" placeholder="0114785412">
+                                        </p>
+
+                                        <p> 
+                                            <label for="preferredContactMode" class="uname" >  Select Preferred Contact Mode</label>
+
+                                            <select name="preferredContactMode">
+                                                <%
+                                                    List<PersonContactMode> listPcm = ManagerDAO.searchAll(new PersonContactMode());
+                                                    for (PersonContactMode pcm : listPcm) {
+                                                %>
+                                                <option value="<%=pcm.getIdcontactPreference()%>"><%=pcm.getContactMode()%></option>
+                                                <%}%>
+
+                                            </select>
+
+                                        </p>
+
+
+                                    </div><!-- Left grid -->
+
+                                    <!-- Right Grid -->
+                                    <div class="grid_8 competences">
+                                        <p> 
+                                            <label for="secondName" class="uname" data-icon="s">  Second Name</label>
+                                            <input id="secondname" name="secondName" type="text" placeholder="Steven">
+                                        </p>
+                                        <p> 
+                                            <label for="dob" class="uname" data-icon="b">  Date of Birth</label>
+                                            <input id="dob" name="dob" required type="date" placeholder="">
+                                        </p>
+                                        <p> 
+                                            <label for="addressLine2" class="uname" data-icon="a2">     Address Line 2</label>
+                                            <input id="address2" name="addressLine2" type="text" placeholder="">
+                                        </p>
+                                        <p> 
+                                            <label for="usernamesignup" class="uname" data-icon="p">   Post Code</label>
+                                            <input id="postcode" name="postcode" required type="text" placeholder="">
+                                        </p>
+
+
+                                        <p> 
+                                            <label for="personalUrl" class="uname" data-icon="u">  Personal URL</label>
+                                            <input id="personalUrl" name="personalurl" type="url" placeholder="">
+                                        </p>
 
 
 
-                </tbody>
-            </table>
-            <center >
-                <input name="adduser" type="submit"   value= "Register" height="20" width="60"/>
+
+                                        <p> 
+                                            <label for="photo" class="uname" data-icon="p">  Photo</label>
+                                            <input id="photo" name="photo" type="file" placeholder="">
+                                        </p>
 
 
-            </center>
+
+
+                                        <p> 
+                                            <label for="studentStatus" class="uname" >   Select your Status</label>
+                                            <select name="studentStatus">
+                                                <%
+                                                    List<PersonStatus> listPs = ManagerDAO.searchAll(new PersonStatus());
+                                                    for (PersonStatus personStatus : listPs) {
+                                                %>
+                                                <option value="<%= personStatus.getIdpersonStatus()%>"><%= personStatus.getPersonStatus()%></option>
+                                                <%}%>
+
+                                            </select>
+                                        </p>
+
+
+
+                                        <p> 
+                                            <label for="employmentLevel" class="uname" > Select your current Employment Level</label>
+                                            <select name="employmentLevel">
+                                                <%
+                                                    List<EmploymentLevel> listEmp = ManagerDAO.searchAll(new EmploymentLevel());
+                                                    for (EmploymentLevel el : listEmp) {
+                                                %>
+                                                <option value="<%=el.getIdLevelOfEmployment()%>"><%=el.getEmploymentLevel()%></option>
+                                                <%}%>
+
+                                            </select>
+                                        </p>
+
+                                    </div>  <!-- Right Grid ends -->
+                                </div>
+
+                                <!-- Login Details -->
+                                <div class="grid_16 experiences"><!-- Bottom Grid  -->
+                                    <h3>Signin Details</h3>
+
+
+
+                                    <p> 
+                                        <label for="userEmail" class="youmail" data-icon="e">Username(Primary Email)</label>
+                                        <input id="userEmail" name="userEmail" required type="email" placeholder="mysupermail@mail.com"> 
+                                    </p>
+                                    <p> 
+                                        <label for="password" class="youpasswd" data-icon="p">Your password </label>
+                                        <input id="password" name="password" required type="password" placeholder="eg. X8df!90EO">
+                                    </p>
+                                    <p> 
+                                        <label for="password" class="youpasswd" data-icon="p">Please confirm your password </label>
+                                        <input id="confirmpassword" name="confirmpassword" type="password" placeholder="eg. X8df!90EO">
+                                    </p>
+                                    <div class="grid_16">
+                                    <div class="grid_8 apropos"><p class="signin button"> 
+                                        <input name="AddUser" type="submit" value="Sign up"/> </div>
+                                        
+                                        <div class="grid_8 competences">
+                                             <p class="change_link">  
+                                        Already a member ?
+                                        <a href="login.jsp" class="to_register"> Go and log in </a>
+                                        </div>
+                                       
+                                    </div>
+                                   
+                                    
+                                    
+                                </div><!--grid 16 Bottom Grid ends -->
+
+
+                            </section><!--Container 16-->
+
+                        </div><!--register-->
+
+                    </div><!--wrapper-->
+                </div>  <!--container_demo-->
+            </section>
+
         </form>
 
-    </body>
+
+
+
+        <%
+            String msg = "";
+            if (msg.equals("")) {
+
+            } else {
+        %>
+        <div><%=msg%></div>
+        <%
+            }
+        %>
+
+   
+        <%@include file="Footer_RecruitMe.html" %>
+
+</body>
 </html>
+
