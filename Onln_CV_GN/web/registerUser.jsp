@@ -5,11 +5,18 @@
 --%>
 
 
+<%@page import="com.cv_gn.model.EmploymentLevel"%>
+<%@page import="com.cv_gn.model.PersonContactMode"%>
+<%@page import="com.cv_gn.model.PersonTitle"%>
+<%@page import="com.cv_gn.dao.ManagerDAO"%>
+<%@page import="java.util.List"%>
+<%@page import="org.hibernate.Criteria"%>
+<%@page import="com.cv_gn.model.PersonStatus"%>
+<%@page import="org.hibernate.Session"%>
+<%@page import="com.cv_gn.model.OnlnCVHiberUtil"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%
-  PersonDAOImpl personDAO=null;
-%>
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -36,14 +43,14 @@
                         town: {required: true},
                         postcode: {required: true},
                         secondemail: {required: true, email: true},
-                       // personalurl: {required: true},
-                       // photo: {required: true},
+                        // personalurl: {required: true},
+                        // photo: {required: true},
                         studentstatus: {required: true},
                         mobile: {required: true, minlength: 10, number: true},
-                       // landline: {required: true, minlength: 10, number: true},
+                        // landline: {required: true, minlength: 10, number: true},
                         dob: {required: true},
-                        userEmail:{required: true,email: true},
-                        password:{required: true,minlength: 6},
+                        userEmail: {required: true, email: true},
+                        password: {required: true, minlength: 6},
                         agree: "required"
                     },
                     // Specify the validation error messages
@@ -56,13 +63,13 @@
                         town: {required: "Town required"},
                         postcode: {required: "Postcode required"},
                         secondemail: {required: "Please enter a valid email address"},
-                        photo: {required: "Please select your photo"},
+                       // photo: {required: "Please select your photo"},
                         studentstatus: {required: "Student Staus required"},
                         mobile: {required: "Mobile required"},
                         landline: {required: "Land Line required"},
                         dob: {required: "Date of Birth required"},
-                        userEmail:{required: "Enter valid email for your username"},
-                        password:{required: "Filed "},
+                        userEmail: {required: "Enter valid email for your username"},
+                        password: {required: "Field is required "},
                         agree: "Please accept our policy"
 
                     },
@@ -88,9 +95,13 @@
                     <tr>
                         <td>Title</td>
                         <td><select name="title">
-                              
-                                <option value="Mrs">Mrs</option>
-                              
+                                <%
+                                         
+                                    List<PersonTitle> ptsList = ManagerDAO.searchAll(new PersonTitle());
+                                    for (PersonTitle pt : ptsList) {
+                                %>
+                                <option value="<%= pt.getIdpersonTitle()%>"><%= pt.getTitle()%></option>
+                                <%}%>
 
                             </select></td>
                     </tr>
@@ -107,12 +118,16 @@
                         <td><input type="text" name="surName" id="surname"  value="" /></td>
                     </tr>
                     <tr>
+                        <td>Date of Birth</td>
+                        <td><input type="date" name="dob" id ="dob" value="" /></td>
+                    </tr>
+                    <tr>
                         <td>Address line 1</td>
-                        <td><input type="text" name="address1" id="address1" value="" /></td>
+                        <td><input type="text" name="addressLine1" id="address1" value="" /></td>
                     </tr>
                     <tr>
                         <td>Address line 2</td>
-                        <td><input type="text" name="address2" id="address2" value="" /></td>
+                        <td><input type="text" name="addressLine2" id="address2" value="" /></td>
                     </tr>
                     <tr>
                         <td>Town</td>
@@ -121,6 +136,15 @@
                     <tr>
                         <td>Post Code</td>
                         <td><input type="text" name="postcode" id ="postcode" value="" /></td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Username(Primary Email)</td>
+                        <td><input type="email" name="userEmail" id ="userEmail" value="" /></td>
+                    </tr>
+                    <tr>
+                        <td>Password</td>
+                        <td><input type="password" name="password" id ="password" value="" /></td>
                     </tr>
                     <tr>
                         <td>Second Email</td>
@@ -135,8 +159,17 @@
                         <td><input type="file" name="photo" id="photo" value="" /></td>
                     </tr>
                     <tr>
-                        <td>Student Status</td>
-                        <td><input type="text" name="studentStatus" id="studentstatus" value="" /></td>
+                        <td>Select your Status</td>
+                        <td><select name="studentStatus">
+                                <%
+                                    List<PersonStatus> listPs = ManagerDAO.searchAll(new PersonStatus());
+                                    for (PersonStatus personStatus : listPs) {
+                                %>
+                                <option value="<%= personStatus.getIdpersonStatus()%>"><%= personStatus.getPersonStatus()%></option>
+                                <%}%>
+
+                            </select>
+                        </td>
                     </tr>
                     <tr>
                         <td>Mobile</td>
@@ -146,30 +179,46 @@
                         <td>Land Line</td>
                         <td><input type="text" name="landLine" id="landline" value="" size="10" /></td>
                     </tr>
-                    <tr>
-                        <td>Date of Birth</td>
-                        <td><input type="date" name="dob" id ="dob" value="" /></td>
+                       <tr>
+                        <td>Select Preferred Contact Mode</td>
+                        <td><select name="preferredContactMode">
+                                <%
+                                    List<PersonContactMode> listPcm = ManagerDAO.searchAll(new PersonContactMode());
+                                    for (PersonContactMode pcm : listPcm) {
+                                %>
+                                <option value="<%=pcm.getIdcontactPreference() %>"><%=pcm.getContactMode()%></option>
+                                <%}%>
+
+                            </select>
+                        </td>
                     </tr>
-                     <tr>
-                        <td>Username</td>
-                        <td><input type="email" name="userEmail" id ="userEmail" value="" /></td>
+                      <tr>
+                        <td>Select your current Employment Level</td>
+                        <td><select name="employmentLevel">
+                                <%
+                                    List<EmploymentLevel> listEmp = ManagerDAO.searchAll(new EmploymentLevel());
+                                    for (EmploymentLevel el : listEmp) {
+                                %>
+                                <option value="<%=el.getIdLevelOfEmployment() %>"><%=el.getEmploymentLevel()%></option>
+                                <%}%>
+
+                            </select>
+                        </td>
                     </tr>
-                     <tr>
-                        <td>Password</td>
-                        <td><input type="password" name="password" id ="password" value="" /></td>
-                    </tr>
+                    
+                    
                     <%
-                    String msg="";
-                    if(msg.equals("")){
-                       
-                    }else{
+                        String msg = "";
+                        if (msg.equals("")) {
+
+                        } else {
                     %>
                 <div><%=msg%></div>
-                    <%
+                <%
                     }
-                    %>
-                   
-                    
+                %>
+
+
 
                 </tbody>
             </table>

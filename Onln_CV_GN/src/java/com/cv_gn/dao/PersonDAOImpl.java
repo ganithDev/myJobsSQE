@@ -9,6 +9,7 @@ import com.cv_gn.model.EducationalQualification;
 import com.cv_gn.model.EmploymentLevel;
 import com.cv_gn.model.Experience;
 import com.cv_gn.model.JobPreference;
+import com.cv_gn.model.OnlnCVHiberUtil;
 import com.cv_gn.model.Person;
 import com.cv_gn.model.PersonContactMode;
 import com.cv_gn.model.PersonStatus;
@@ -20,6 +21,7 @@ import com.cv_gn.model.User;
 import com.cv_gn.model.UserType;
 import com.cv_gn.util.DBConnection;
 import com.cv_gn.util.Onln_CV_GNConstant;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -30,6 +32,9 @@ import java.util.Date;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 /**
  *
@@ -41,9 +46,10 @@ private static PreparedStatement pstmt1=null;
      private static Connection conn=null;
      private static PersonDAOImpl pl=null;
      
-     
-    public String addPerson(User user,Person p,PersonStatus personStatus,PersonTitle personTitle,PersonContactMode pcm) {
-        // Open Database Connection 
+   
+    public String addPerson(User user,Person p) {
+    // Open Database Connection
+   
         Connection conn = DBConnection.getDBConnection();
 
         if (conn != null) { // Check Connection Object
@@ -77,7 +83,7 @@ private static PreparedStatement pstmt1=null;
                     //Get user ID from the database
                     String userID = new UserDAOImpl().getUserID(user.getUsername());
                     short user_id = Short.parseShort(userID);
-                    String personInsertQry = "INSERT INTO person VALUES('0','" + user_id + "','" + personTitle.getTitle() + "','" + p.getForename1() + "','" + p.getForename2() + "','" + p.getSurname() + "','" + p.getAddressLine1() + "','" + p.getAddressLine2() + "','" + p.getTown() + "','" + p.getPostcode() + "','" + p.getSecondEmail() + "','" + p.getPersonalUrl() + "','" + p.getPhoto() + "','0','" + p.getPostcodeStart() + "','" + p.getAuthorityToWorkStatement() + "','" + pcm.getContactMode() + "','" + p.getNoOfGcses() + "','" + p.getGcseEnglishGrade() + "','" + p.getGcseMathsGrade() + "','0','" + p.getNoOfAlevels() + "','" + p.getUcasPoints() + "','" + personStatus.getPersonStatus() + "','" + p.getMobile() + "','" + p.getLandline() + "','" + birthDay + "','" + p.getPenaltyPoints() + "','1')";
+                    String personInsertQry = "INSERT INTO person VALUES('0','" + user_id + "','Mr.','" + p.getForename1() + "','" + p.getForename2() + "','" + p.getSurname() + "','" + p.getAddressLine1() + "','" + p.getAddressLine2() + "','" + p.getTown() + "','" + p.getPostcode() + "','" + p.getSecondEmail() + "','" + p.getPersonalUrl() + "','" + p.getPhoto() + "','0','" + p.getPostcodeStart() + "','" + p.getAuthorityToWorkStatement() + "','Mobile','" + p.getNoOfGcses() + "','" + p.getGcseEnglishGrade() + "','" + p.getGcseMathsGrade() + "','0','" + p.getNoOfAlevels() + "','" + p.getUcasPoints() + "','" + p.getPersonStatus() + "','" + p.getMobile() + "','" + p.getLandline() + "','" + birthDay + "','" + p.getPenaltyPoints() + "','1')";
 
                     preparedStatementPerson = conn.prepareStatement(personInsertQry);
                     //Save Person to database
@@ -114,6 +120,57 @@ private static PreparedStatement pstmt1=null;
         }
 
     }
+    
+    public String addPerson(User user,Person person,PersonStatus personStatus,PersonTitle personTitle,PersonContactMode pcm) {
+    // Open Database Connection
+    Session session = OnlnCVHiberUtil.getSessionFactory().openSession();
+      
+        try {
+            
+                
+
+        Transaction transaction = session.beginTransaction();
+        UserType ut = (UserType) session.load(UserType.class, Short.parseShort("1"));//Bug:Provided id of the wrong type for class UserType. Expected: class Short, got class Integer #6
+        user.setUserType(ut);
+            System.out.println(" user.setUserType(ut);");
+        PersonStatus ps = (PersonStatus) session.load(PersonStatus.class, personStatus.getIdpersonStatus());
+        PersonTitle pt=(PersonTitle) session.load(PersonTitle.class, personTitle.getIdpersonTitle());
+        PersonContactMode prsncm=(PersonContactMode) session.load(PersonContactMode.class, pcm.getIdcontactPreference());
+             person.setPersonContactMode(prsncm);
+             person.setPersonTitle(pt);
+             person.setPersonStatus(ps);
+             
+             user.setRegisterDate(new Date());
+           
+             //Save User to database
+             System.out.println("Save User to database");
+       session.save(user);
+       
+       
+              person.setUser(user);
+              System.out.println("person.setUser(user);");
+person.setDob(person.getDob());
+                  
+                    //Save Person to database
+                   session.save(person);
+                    System.out.println("Save Person to database");
+                    //Commit the changes to database
+                   transaction.commit();
+                   session.close();
+                   
+                   
+  return "success";
+        } catch (Exception ex) {
+            Logger.getLogger(PersonDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+           
+              return "";
+                } 
+
+          
+        
+
+    
     
        public String getPersonTitleLength() {
         int titleLength=0;
