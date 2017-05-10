@@ -1,11 +1,15 @@
 /* remove codrops styles and reset the whole thing */
 #container_demo{
 	 text-align: left;
+         
 	 margin: 0;
 	 padding: 0;
 	 margin: 0 auto;
 	 font-family: "Trebuchet MS","Myriad Pro",Arial,sans-serif;
          height: auto;
+         width: auto;
+         margin-left: 185px;
+         margin-right: 200px;
 }
 
 /** fonts used for the icons **/ 
@@ -35,11 +39,11 @@ a.hiddenanchor{
 }
 /** The wrapper that will contain our two forms **/
 #wrapper{
-	width: 60%;
+	width: 80%;
 	right: 0px;
 	min-height: 560px;	
 	margin: 0px auto;	
-	width: auto;
+	
 	position: relative;	
 }
 /**** Styling the form elements **/
@@ -206,6 +210,7 @@ p.login.button,
 p.signin.button{
 	text-align: right;
 	margin: 5px 0;
+        left: 0px;
 }
 
 
@@ -304,7 +309,7 @@ p.change_link{
 #login{
 	position: absolute;
 	top: 0px;
-	width: 88%;	
+	width: 90%;	/*change the total width*/
 	padding: 18px 6% 60px 6%;
 	margin: 0 0 35px 0;
 	background: rgb(247, 247, 247);
@@ -360,7 +365,7 @@ p.change_link{
 }
 */
 
-/** the actual animation, credit where due : http://daneden.me/animate/ ***/
+/**/
 .animate{
 	-webkit-animation-duration: 0.5s;
 	-webkit-animation-fill-mode: both;

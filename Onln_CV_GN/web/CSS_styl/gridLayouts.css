@@ -34,6 +34,38 @@
     width:98%;
 /*  height: 1000px;*/
 }
+.container_tbl{
+    width: 92%;
+    display: inline-table;
+}
+.container_tbl .grid_2_c1{
+    display: inline;
+    display: inline-block;
+    position: relative;   
+    width: 20%;
+    margin-left: 5%;
+}
+.container_tbl .grid_2_c2{
+    display: inline;
+    display: inline-block;
+    position: relative;   
+    width: 20%;
+    margin-left: 5%;
+}
+.container_tbl .grid_2_c3{
+    display: inline;
+    display: inline-block;
+    position: relative;   
+    width: 20%;
+    margin-left: 5%;
+}
+.container_tbl .grid_2_c4{
+    display: inline;
+    display: inline-block;
+    position: relative;   
+    width: 20%;
+    margin-left: 5%;
+}
 
 
 .clearfix:after {

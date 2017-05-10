@@ -23,15 +23,9 @@
 
 
         <title>Registration Form | RecruitMe</title>
-
-        <link rel="stylesheet" type="text/css" href="CSS_styl/Top_Foot.css"><!--Used for form design-->
-        <link rel="stylesheet" type="text/css" href="CSS_styl/demo.css"><!--Used for form design-->
-        <link rel="stylesheet" type="text/css" href="CSS_styl/style3.css"><!--Used for form design-->
-        <link rel="stylesheet" type="text/css" href="CSS_styl/gridLayouts.css"><!--Used for grid layouts-->
-
-        <!-- Load jQuery and the validate plugin -->
-        <script src="/Onln_CV_GN/jquerylbs/jquery-19.1.js"></script>
-        <script src="/Onln_CV_GN/jquerylbs/jquery.validate.min.js"></script>
+<%@include file="fileSet.html" %>
+        <%@include file="Header_RecruitMe.html" %>
+        
         <!-- jQuery Form Validation code -->
         <script>
 

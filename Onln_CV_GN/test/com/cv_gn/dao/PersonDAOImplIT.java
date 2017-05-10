@@ -21,9 +21,9 @@ import static org.junit.Assert.*;
  *
  * @author Ganith Perera
  */
-public class PersonDAOImplTest {
+public class PersonDAOImplIT {
     
-    public PersonDAOImplTest() {
+    public PersonDAOImplIT() {
     }
     
     @BeforeClass

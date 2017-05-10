@@ -20,14 +20,8 @@ import com.cv_gn.model.Referee;
 import com.cv_gn.model.SkillPerson;
 import com.cv_gn.model.User;
 import com.cv_gn.model.UserType;
-import com.cv_gn.util.DBConnection;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
@@ -62,9 +56,8 @@ public class UserRegistrationController extends HttpServlet {
 
             String title = "", firstName = "", secondName = "", surName = "", addressLine1 = "",
                     addressLine2 = "", town = "", postcode = "", secondEmail = "", personalUrl = "", photo = "",
-                    studentStatus = "", mobile = "", landLine = "", dob = "", userEmail = "", password = "",contactPreference = "",empLevel=""
-                    ,msg=
-                    "";
+                    studentStatus = "", mobile = "", landLine = "", dob = "", userEmail = "", password = "", contactPreference = "", empLevel = "", msg
+                    = "";
             //initializing the varibales from the values submitted from registerUser
             title = request.getParameter("title");
             firstName = request.getParameter("firstName");
@@ -91,73 +84,67 @@ public class UserRegistrationController extends HttpServlet {
             //  Short noOfGcses=0, String , String gcseMathsGrade, Boolean fiveOrMoreGcses, Short noOfAlevels, Short ucasPoints, String studentStatus, String mobile, String landline, Date dob, Short penaltyPoints, Set<Referee> referees, Set<SkillPerson> skillPersons, Set<EducationalQualification> educationalQualifications, Set<Experience> experiences, Set<ProfessionalQualification> professionalQualifications, Set<JobPreference> jobPreferences)
 
             //Validate User available
-            if("".equals(title) || "".equals(firstName)|| "".equals(surName)|| "".equals(addressLine1)||"".equals(town)||"".equals(postcode)||"".equals(secondEmail)||"".equals(mobile)||"".equals(dob)
-                    ||"".equals(userEmail)||"".equals(password)){
-            msg="Required field or fields empty";
+            if ("".equals(title) || "".equals(firstName) || "".equals(surName) || "".equals(addressLine1) || "".equals(town) || "".equals(postcode) || "".equals(secondEmail) || "".equals(mobile) || "".equals(dob)
+                    || "".equals(userEmail) || "".equals(password)) {
+                msg = "Required field or fields empty";
                 System.out.println("Required field or fields empty");
-            response.sendRedirect("registerUser.jsp?msg="+msg);
-            }
-            else if(new UserDAOImpl().checkUsernameAvailable(userEmail)==true){
-            msg="Email is already available.Please insert another one";
-             System.out.println("Email is already available");
-            response.sendRedirect("registerUser.jsp?msg="+msg);
-            }else if(false){
-            
-            }
-            
-        
-            else{
-            UserType userType = new UserType();      
-            Set<Referee> referees = new HashSet<Referee>(0);
-            Set<SkillPerson> skillPersons = new HashSet<SkillPerson>(0);
-            Set<EducationalQualification> educationalQualifications = new HashSet<EducationalQualification>(0);
-            Set<Experience> experiences = new HashSet<Experience>(0);
-            Set<ProfessionalQualification> professionalQualifications = new HashSet<ProfessionalQualification>(0);
-            Set<JobPreference> jobPreferences = new HashSet<JobPreference>(0);
-            EmploymentLevel employmentLevel = new EmploymentLevel();      
-            employmentLevel.setIdLevelOfEmployment(Short.parseShort(empLevel));
-            PersonStatus personStatus=new PersonStatus();
-            personStatus.setIdpersonStatus(Integer.parseInt(studentStatus));
-            PersonTitle personTitle=new PersonTitle();
-            personTitle.setIdpersonTitle(Integer.parseInt(title));
-            PersonContactMode pcm=new PersonContactMode();
-            pcm.setIdcontactPreference(Integer.parseInt(contactPreference));
+                response.sendRedirect("registerUser.jsp?msg=" + msg);
+            } else if (new UserDAOImpl().checkUsernameAvailable(userEmail) == true) {
+                msg = "Email is already available.Please insert another one";
+                System.out.println("Email is already available");
+                response.sendRedirect("registerUser.jsp?msg=" + msg);
+            } else if (false) {
+
+            } else {
+                UserType userType = new UserType();
+                Set<Referee> referees = new HashSet<Referee>(0);
+                Set<SkillPerson> skillPersons = new HashSet<SkillPerson>(0);
+                Set<EducationalQualification> educationalQualifications = new HashSet<EducationalQualification>(0);
+                Set<Experience> experiences = new HashSet<Experience>(0);
+                Set<ProfessionalQualification> professionalQualifications = new HashSet<ProfessionalQualification>(0);
+                Set<JobPreference> jobPreferences = new HashSet<JobPreference>(0);
+                EmploymentLevel employmentLevel = new EmploymentLevel();
+                employmentLevel.setIdLevelOfEmployment(Short.parseShort(empLevel));
+                PersonStatus personStatus = new PersonStatus();
+                personStatus.setIdpersonStatus(Integer.parseInt(studentStatus));
+                PersonTitle personTitle = new PersonTitle();
+                personTitle.setIdpersonTitle(Integer.parseInt(title));
+                PersonContactMode pcm = new PersonContactMode();
+                pcm.setIdcontactPreference(Integer.parseInt(contactPreference));
 
 //Create the User object
-            User user = new User(userType, userEmail, password);
-               out.println("Create the User object");
-            System.out.println("dob="+dob);
-            birthDay = new SimpleDateFormat("yyyy-MM-dd").parse(dob);
-            System.out.println("date="+birthDay);
-            Person person = null;
-            Boolean fm = Boolean.FALSE;
-            out.println("female="+fm);
-            Short noOfGces=5, ucasPoints=10,noOfAlevels=2,penaltyPoints=11;//Need to define at registration or other approach
-            
-            
-            //Create the Person object
-             out.println("Create the Person object");
-            person = new Person(employmentLevel,pcm,personStatus, personTitle,user, firstName, secondName, surName, addressLine1, addressLine2, town, postcode, 
-                    secondEmail, personalUrl, photo, Boolean.FALSE, postcodeStart, authorityToWorkStatement,noOfGces , 
-                    gcseEnglishGrade, gcseMathsGrade, Boolean.FALSE, noOfAlevels, ucasPoints, mobile, landLine, birthDay, 
-                    penaltyPoints, referees, skillPersons, educationalQualifications, experiences, professionalQualifications, 
-                    jobPreferences);
-            
-          
-            
-            //Pass person,user objects to addPerson 
-               out.println("Pass person");
-            String addPerson = new PersonDAOImpl().addPerson(user,person,personStatus,personTitle,pcm);
-            if(addPerson.equals("success")){
-            response.sendRedirect("home.jsp");
-            }else{
-            response.sendRedirect("registerUser.jsp?msg="+addPerson);
-            }
+                User user = new User(userType, userEmail, password);
+                out.println("Create the User object");
+                System.out.println("dob=" + dob);
+                birthDay = new SimpleDateFormat("yyyy-MM-dd").parse(dob);
+                System.out.println("date=" + birthDay);
+                Person person = null;
+                Boolean fm = Boolean.FALSE;
+                out.println("female=" + fm);
+                Short noOfGces = 5, ucasPoints = 10, noOfAlevels = 2, penaltyPoints = 11;//Need to define at registration or other approach
 
-            Referee referee1 = null, referee2 = null;
-           // referee1 = new Referee(person, "Mr.", "Alex", "Stuart", "alx@yahoo.com", "845784", "employer", Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, "referee contacted by email", "path1");
-            ///referee2 = new Referee(person, "Mr.", "Ray", "Fernando", "ray@yahoo.com", "878954", "academic", Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, "referee contacted by mobile", "path2");
-            }}
+                //Create the Person object
+                out.println("Create the Person object");
+                person = new Person(employmentLevel, pcm, personStatus, personTitle, user, firstName, secondName, surName, addressLine1, addressLine2, town, postcode,
+                        secondEmail, personalUrl, photo, Boolean.FALSE, postcodeStart, authorityToWorkStatement, noOfGces,
+                        gcseEnglishGrade, gcseMathsGrade, Boolean.FALSE, noOfAlevels, ucasPoints, mobile, landLine, birthDay,
+                        penaltyPoints, referees, skillPersons, educationalQualifications, experiences, professionalQualifications,
+                        jobPreferences);
+
+                //Pass person,user objects to addPerson 
+                out.println("Pass person");
+                String addPerson = new PersonDAOImpl().addPerson(user, person, personStatus, personTitle, pcm);
+                if (addPerson.equals("success")) {
+                    response.sendRedirect("home.jsp");
+                } else {
+                    response.sendRedirect("registerUser.jsp?msg=" + addPerson);
+                }
+
+                Referee referee1 = null, referee2 = null;
+                // referee1 = new Referee(person, "Mr.", "Alex", "Stuart", "alx@yahoo.com", "845784", "employer", Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, "referee contacted by email", "path1");
+                ///referee2 = new Referee(person, "Mr.", "Ray", "Fernando", "ray@yahoo.com", "878954", "academic", Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, "referee contacted by mobile", "path2");
+            }
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

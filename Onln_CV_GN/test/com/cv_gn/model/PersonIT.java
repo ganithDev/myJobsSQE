@@ -18,9 +18,9 @@ import static org.junit.Assert.*;
  *
  * @author Ganith Perera
  */
-public class PersonTest {
+public class PersonIT {
     
-    public PersonTest() {
+    public PersonIT() {
     }
     
     @BeforeClass
@@ -786,7 +786,7 @@ public class PersonTest {
      * Test of setDob method, of class Person.
      */
     @Test
-    public void testSetDob() {
+    public void testSetDob_Date() {
         System.out.println("setDob");
         Date dob = null;
         Person instance = new Person();
@@ -980,19 +980,6 @@ public class PersonTest {
         Set<JobPreference> jobPreferences = null;
         Person instance = new Person();
         instance.setJobPreferences(jobPreferences);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setDob method, of class Person.
-     */
-    @Test
-    public void testSetDob_Date() {
-        System.out.println("setDob");
-        Date dob = null;
-        Person instance = new Person();
-        instance.setDob(dob);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
