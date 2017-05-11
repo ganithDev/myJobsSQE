@@ -6,9 +6,6 @@
 package com.cv_gn.dao;
 
 import com.cv_gn.model.User;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 
@@ -18,9 +15,7 @@ import org.hibernate.criterion.Restrictions;
  */
 public class UserDAOImpl {
 
-    private static PreparedStatement pstmt1 = null;
-    private static Connection conn = null;
-
+    
     public boolean checkUsernameAvailable(String username) {
         Criteria cr = ManagerDAO.openDBSession().createCriteria(com.cv_gn.model.User.class);
         cr.add(Restrictions.eq("username", username));
