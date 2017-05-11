@@ -279,22 +279,16 @@
                                         <p> 
                                             <input type="submit" value="Add" />
                                         </p>
-                                         <p>
+                                        <p>
                                             <label for="title" class="uname" data-icon="u"> Enter Job Title</label>
                                             <input type="text" name="usertype" value="" />
-                                        </p>
-                                        
-
-
+                                        </p>                               
                                     </div>  <!-- Right Grid ends -->
                                     <div class="grid_three_c4">   
 
-                                       <p> 
+                                        <p> 
                                             <input type="submit" value="Add" />
                                         </p>
-
-
-
                                     </div>
                                 </div>
 
