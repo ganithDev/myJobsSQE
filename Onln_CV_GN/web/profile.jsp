@@ -4,6 +4,9 @@
     Author     : Ganith Perera
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="com.cv_gn.dao.ManagerDAO"%>
+<%@page import="com.cv_gn.model.PersonContactMode"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -24,11 +27,6 @@
                         <section role="main" class="container_16 clearfix"><!--Contain design related to two grids-->
                             <div class="grid_16 experiences"><!-- Bottom Grid  -->
                                 <h3>Educational Qualifications</h3>
-
-
-
-
-
                                 <div class="container_tbl">
 
                                     <div class="grid_2_c1">
@@ -86,28 +84,29 @@
                                     </p>
                                     <div class="container_tbl">
                                         <div class="grid_2_c1">
-<p> 
-                                        <label for="legallyBond">Legally Bond</label>
-                                        <input id="legallyBond" name="legallyBond" required type="checkbox">
-                                    </p>
+                                            <p> 
+                                                <label for="legallyBond">Legally Bond</label>
+                                                <input id="legallyBond" name="legallyBond" required type="checkbox">
+                                            </p>
                                         </div>
                                         <div class="grid_2_c2">
-<p> 
-                                        <label for="postcodeStart">Postcode Start</label>
-                                        <input id="postcodeStart" name="postcodeStart" required type="checkbox">
-                                    </p>
+                                            <p> 
+                                                <label for="postcodeStart">Postcode Start</label>
+                                                <input id="postcodeStart" name="postcodeStart" required type="checkbox">
+                                            </p>
                                         </div>
                                         <div class="grid_2_c4">
-<p> 
-                                        <label for="penaltyPoints">Penalty Points</label>
-                                        <input id="penaltyPoints" name="penaltyPoints" required type="number">
-                                    </p>
+                                            <p> 
+                                                <label for="penaltyPoints">Penalty Points</label>
+                                                <input id="penaltyPoints" name="penaltyPoints" required type="number">
+                                            </p>
                                         </div>
                                     </div>
 
                                     <div class="grid_8 apropos"><p class="signin button"> 
                                             <input name="AddUser" type="submit" value="Generate CV"/> 
                                     </div>
+
 
                                 </div>
 
@@ -116,6 +115,19 @@
                         </section><!--Contain design related to two grids-->
                     </div></div></div>
         </section>
-    </body>
-    <%@include file="Footer_RecruitMe.html" %>
+        <br><br><br>
+        <p> 
+            
+  
+        <form method="POST" action="/Onln_CV_GN/PDFGeneratorServlet">
+            <input type="text" id="secondname" name="secondName" value="Email" readonly="readonly" />
+            <input type="text" id="firstname" name="firstName" value="Naduni" readonly="readonly" />
+            
+            <input type="submit" value="Generate PDF" name="submit" />
+        </form>
+    </p>
+
+
+</body>
+<%@include file="Footer_RecruitMe.html" %>
 </html>

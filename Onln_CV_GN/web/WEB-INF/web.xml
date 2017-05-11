@@ -4,9 +4,17 @@
         <servlet-name>UserRegistrationController</servlet-name>
         <servlet-class>com.cv_gn.controller.UserRegistrationController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PDFGeneratorServlet</servlet-name>
+        <servlet-class>com.cv_gn.controller.PDFGeneratorServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserRegistrationController</servlet-name>
         <url-pattern>/UserRegistrationController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PDFGeneratorServlet</servlet-name>
+        <url-pattern>/PDFGeneratorServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
