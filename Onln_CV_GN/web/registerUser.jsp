@@ -24,7 +24,6 @@
 
         <title>Registration Form | RecruitMe</title>
 <%@include file="fileSet.html" %>
-        <%@include file="Header_RecruitMe.html" %>
         
         <!-- jQuery Form Validation code -->
         <script>

@@ -62,21 +62,22 @@
                                     <input id="userEmail" name="userEmail" required type="email" placeholder="mysupermail@mail.com"> 
                                 </p>
                                 <p> 
-                                    <label for="passwordsignup" class="youpasswd" data-icon="p">Your password </label>
+                                    <label for="passwordsignup" class="youpasswd" >Your password </label>
                                     <input id="password" name="passwordsignup" required type="password" placeholder="eg. X8df!90EO">
                                 </p>
-                                
+                                <section role="main" class="container_16 clearfix"><!--Contain design related to two grids-->
                                 <div class="grid_16">
-                                    <div class="grid_8 apropos"><p class="signin button"> 
-                                        <input name="LoginUser" type="submit" value="Sign up"/> </div>
+                                    <div class="grid_8"><p class="signin button"> 
+                                        <input name="LoginUser" type="submit" value="Sign in"/> </div>
                                         
-                                        <div class="grid_8 competences">
+                                        <div class="grid_8">
                                              <p class="change_link">  
                                        New to RecruitMe ?
-                                        <a href="login.jsp" class="to_register"> Create an Account </a>
+                                       <a href="login.jsp" class="to_register"> Create an Account </a></p>
                                         </div>
                                        
                                     </div>
+                                </section>
                                    
                                         
                                

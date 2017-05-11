@@ -32,7 +32,10 @@ ol li
 
 #header
 { background: #1D1D1D url(Images/header.png) repeat;
-  height: 240px;}
+  height: 160px;
+  margin-top: 0px;
+
+}
 
 #logo
 { width: 825px;
@@ -65,7 +68,7 @@ ol li
   color: #DDD;}
 
 #menubar
-{ width: 900px;
+{ width: 100%;
   height: 72px;
   padding: 0;
   background: #1293EE;} 
@@ -97,10 +100,14 @@ ul#menu li a:hover, ul#menu li.selected a, ul#menu li.selected a:hover
 
 
 #footer
-{ width: 900px;
+{ width: 100%;
+  margin-bottom: 0px;
+  position: fixed;
   font: normal 100% 'lucida sans unicode', arial, sans-serif;
   height: 33px;
-  padding: 24px 0 5px 0;
+  padding: 10px 10px 5px 0;
+ 
+  
   text-align: center; 
   background: #1293EE;
   color: #FFF;
