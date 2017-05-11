@@ -11,6 +11,13 @@
 <%@page import="com.cv_gn.dao.ManagerDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+    if (session.getAttribute("Agency") == null) {
+        response.sendRedirect("login.jsp");
+    } else {
+           
+        
+%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -210,3 +217,5 @@ vii.	Specific experience
     </body>
     <%@include file="Footer_RecruitMe.html" %>
 </html>
+<% }
+%>

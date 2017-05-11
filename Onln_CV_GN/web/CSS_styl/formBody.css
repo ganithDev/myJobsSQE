@@ -1,8 +1,9 @@
 /* remove codrops styles and reset the whole thing */
 #container_demo{
 	 text-align: left;
-         
+        
 	 margin: 0;
+          
 	 padding: 0;
 	 margin: 0 auto;
 	 font-family: "Trebuchet MS","Myriad Pro",Arial,sans-serif;
@@ -10,6 +11,7 @@
          width: auto;
          margin-left: 185px;
          margin-right: 200px;
+         margin-top: 73px;
 }
 
 /** fonts used for the icons **/ 
@@ -169,10 +171,10 @@ input {
 	width: 30%;
 	cursor: pointer;	
 	background: rgb(61, 157, 179);
-	padding: 8px 5px;
+	padding: 4px 2px;
 	font-family: 'BebasNeueRegular','Arial Narrow',Arial,sans-serif;
 	color: #fff;
-	font-size: 24px;	
+	font-size: 16px;	
 	border: 1px solid rgb(28, 108, 122);	
 	margin-bottom: 10px;	
 	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);

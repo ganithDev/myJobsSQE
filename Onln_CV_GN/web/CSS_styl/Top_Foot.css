@@ -13,12 +13,20 @@ a:hover
 
 
 ul
-{ margin: 2px 0 22px 17px;}
+{ 
+    margin: 2px 0 22px 17px;
+top: 0px;
+
+}
 
 ul li
 { list-style-type: circle;
-  margin: 0 0 6px 0; 
-  padding: 0 0 4px 5px;}
+ 
+  /*margin: 0 0 6px 0; */
+  
+  padding: 0 0 4px 5px;
+top: 0px;
+}
 
 ol
 { margin: 8px 0 22px 20px;}
@@ -34,6 +42,7 @@ ol li
 { background: #1D1D1D url(Images/header.png) repeat;
   height: 160px;
   margin-top: 0px;
+  top: 0px;
 
 }
 
@@ -70,43 +79,55 @@ ol li
 #menubar
 { width: 100%;
   height: 72px;
-  padding: 0;
+  margin-bottom: 10%;
+  text-align: center;
+  top:0px;
+  position: absolute;/*remove the space from the the top*/
   background: #1293EE;} 
 
 ul#menu, ul#menu li
-{ float: left;
+{float: left;
   margin: 0; 
-  padding: 0;}
+  padding: 0;
+top: 0px;
+}
 
 ul#menu li
-{ list-style: none;}
+{ list-style: none;
+top: 0px;
+}
 
 ul#menu li a
 { letter-spacing: 0.1em;
   font: normal 100% arial, sans-serif;
   display: block; 
   float: left; 
+
   height: 37px;
   padding: 29px 26px 6px 26px;
   text-align: center;
   color: #FFF;
   text-transform: uppercase;
   text-decoration: none;
-  background: transparent;} 
+  background: transparent;
+top: 0px;
+} 
 
 ul#menu li a:hover, ul#menu li.selected a, ul#menu li.selected a:hover
 { color: #FFF;
-  background: #0D66A5;}
+  background: #0D66A5;
+top: 0px;
+}
 
 
 #footer
 { width: 100%;
-  margin-bottom: 0px;
+  bottom: 0px;/*fixed footer*/
+  margin: 0px;
+  
   position: fixed;
   font: normal 100% 'lucida sans unicode', arial, sans-serif;
   height: 33px;
-  padding: 10px 10px 5px 0;
- 
   
   text-align: center; 
   background: #1293EE;

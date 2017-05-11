@@ -8,6 +8,14 @@
         <servlet-name>UserRegistrationController</servlet-name>
         <url-pattern>/UserRegistrationController</url-pattern>
     </servlet-mapping>
+     <servlet>
+        <servlet-name>UserLogin</servlet-name>
+        <servlet-class>com.cv_gn.controller.UserLogin</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserLogin</servlet-name>
+        <url-pattern>/UserLogin</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

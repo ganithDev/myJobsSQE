@@ -27,22 +27,24 @@ public class UserLogin extends HttpServlet {
                 HttpSession hs = request.getSession();
                 String username = "", password = "";
                 username = request.getParameter("userEmail");
+                out.write("usrnm="+username);
                 password = request.getParameter("password");
                 User u = new UserDAOImpl().isUserAvailable(username);
                 if (u == null) {
                     response.sendRedirect("login.jsp?msg=Please insert your valid username.");
                 } else {
-                    User userOk = new UserDAOImpl().isUserPassswordCorrect(password, u);
-                    if (userOk == null) {
+                    String userOk = new UserDAOImpl().isUserPassswordCorrect(password, u);
+                    if (userOk.equals("wrong")) {
                         response.sendRedirect("login.jsp?msg=Please insert your valid password.");
                     } else {
-                        if (userOk.getUserType().getUserType().equals("Admin")) {
-                            hs.setAttribute("Admin", userOk);
-                        } else if (userOk.getUserType().getUserType().equals("Agency")) {
-                            hs.setAttribute("Agency", userOk);
+                        if (u.getUserType().getUserType().equals("Admin")) {
+                            hs.setAttribute("Admin", u);
+                           response.sendRedirect("adminPanel.jsp");
+                        } else if (u.getUserType().getUserType().equals("Agency")) {
+                            hs.setAttribute("Agency", u);
                             response.sendRedirect("searchCV.jsp");
                         } else {
-                            hs.setAttribute("JobSeeker", userOk);
+                            hs.setAttribute("JobSeeker", u);
                             response.sendRedirect("profile.jsp");
                         }
                     }

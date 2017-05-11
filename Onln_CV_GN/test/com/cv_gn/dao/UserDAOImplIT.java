@@ -77,9 +77,21 @@ public class UserDAOImplIT {
         String password = "";
         User usr = null;
         UserDAOImpl instance = new UserDAOImpl();
-        User expResult = null;
-        User result = instance.isUserPassswordCorrect(password, usr);
+        String expResult = "";
+        String result = instance.isUserPassswordCorrect(password, usr);
         assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of main method, of class UserDAOImpl.
+     */
+    @Test
+    public void testMain() {
+        System.out.println("main");
+        String[] args = null;
+        UserDAOImpl.main(args);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

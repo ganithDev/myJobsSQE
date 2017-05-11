@@ -5,6 +5,9 @@
  */
 package com.cv_gn.dao;
 
+import com.cv_gn.model.EducationLevel;
+import com.cv_gn.model.EducationalQualification;
+import com.cv_gn.model.EmploymentLevel;
 import com.cv_gn.model.OnlnCVHiberUtil;
 import com.cv_gn.model.Person;
 import com.cv_gn.model.PersonContactMode;
@@ -23,18 +26,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
  * @author Ganith Perera
  */
 public class PersonDAOImpl {
-
-    private static PreparedStatement pstmt1 = null;
-    private static Connection conn = null;
-    private static PersonDAOImpl pl = null;
 
     public String addPerson(User user, Person person, PersonStatus personStatus, PersonTitle personTitle, PersonContactMode pcm) {
         // Open Database Connection
@@ -54,6 +55,7 @@ public class PersonDAOImpl {
             person.setPersonStatus(ps);
 
             user.setRegisterDate(new Date());
+            user.setPassword(ManagerDAO.encrypt(user.getPassword()));
 
             //Save User to database
             System.out.println("Save User to database");
@@ -78,4 +80,24 @@ public class PersonDAOImpl {
         return "";
     }
 
+    public String addEduQualification(EducationalQualification eq, Person p, EducationLevel el, User usr) {
+        Session session = OnlnCVHiberUtil.getSessionFactory().openSession();
+        try {
+            Transaction tr = session.beginTransaction();
+            EducationLevel educationLevel = (EducationLevel) session.load(EmploymentLevel.class, el.getIdEducationLevel());
+            eq.setEducationLevel(educationLevel);
+
+            Criteria cr = session.createCriteria(Person.class);
+            cr.add(Restrictions.eq("user", usr));
+            Person person = (Person) cr.uniqueResult();
+            eq.setPerson(person);
+            session.save(eq);
+            tr.commit();
+            session.close();
+            return "success";
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return "";
+    }
 }

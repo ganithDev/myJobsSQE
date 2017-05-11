@@ -37,6 +37,7 @@
 .container_tbl{
     width: 92%;
     display: inline-table;
+    padding-bottom: 20px;
 }
 .container_tbl .grid_2_c1{
     display: inline;
@@ -298,7 +299,9 @@
 			background-position: 11px -194px;
 		}
 	
-             
+                .grid_16 .experiences{
+                    padding-top: 10px;
+                }  
 	.experiences ul, .formations ul {
 		margin-left: 60px;
 	}

@@ -25,69 +25,12 @@
         <title>Registration Form | RecruitMe</title>
 <%@include file="fileSet.html" %>
         
-        <!-- jQuery Form Validation code -->
-        <script>
-
-            // When the browser is ready...
-            $(function () {
-
-                // Setup form validation on the #register-form element
-                $("#register-form").validate({
-                    // Specify the validation rules
-                    rules: {
-                        firstname: {required: true},
-                        secondname: {required: true},
-                        surname: {required: true},
-                        address1: {required: true},
-                        address2: {required: true},
-                        town: {required: true},
-                        postcode: {required: true},
-                        secondemail: {required: true, email: true},
-                        // personalurl: {required: true},
-                        // photo: {required: true},
-                        studentstatus: {required: true},
-                        mobile: {required: true, minlength: 10, number: true},
-                        // landline: {required: true, minlength: 10, number: true},
-                        dob: {required: true},
-                        userEmail: {required: true, email: true},
-                        password: {required: true, minlength: 6},
-                        agree: "required"
-                    },
-                    // Specify the validation error messages
-                    messages: {
-                        firstname: {required: "First Name required"},
-                        secondname: {required: "Second Name required"},
-                        surname: {required: "Surname required"},
-                        address1: {required: "Address 1 required"},
-                        address2: {required: "Address 2 required"},
-                        town: {required: "Town required"},
-                        postcode: {required: "Postcode required"},
-                        secondemail: {required: "Please enter a valid email address"},
-                        // photo: {required: "Please select your photo"},
-                        studentstatus: {required: "Student Staus required"},
-                        mobile: {required: "Mobile required"},
-                        landline: {required: "Land Line required"},
-                        dob: {required: "Date of Birth required"},
-                        userEmail: {required: "Enter valid email for your username"},
-                        password: {required: "Field is required "},
-                        agree: "Please accept our policy"
-
-                    },
-                    submitHandler: function (form) {
-                        form.submit();
-                    }
-                });
-
-            });
-
-        </script>
-        <!-- End jQuery Form Validation code -->
         <%@include file="Header_RecruitMe.html" %>
     </head>
     <body>
 
         <!-- Corps -->
-        <form method="POST" action="UserRegistrationController?actionType=AddUser" novalidate id="register-form" autocomplete="on">
+        <form method="get" action="UserRegistrationController?actionType=AddUser" novalidate id="register-form" autocomplete="on">
             <section>				
                 <div id="container_demo"><!--Contain design related to form-->
 
@@ -98,6 +41,7 @@
                             <section role="main" class="container_16 clearfix"><!--Contain design related to two grids-->
                                 <h1> User Registration</h1> 
                                 <div class="grid_16">
+                                    <h3>Personal Information</h3>
                                     <!-- Left grid -->
                                     <div class="grid_8 apropos">
 
@@ -155,6 +99,18 @@
                                             </select>
 
                                         </p>
+                                        <p> 
+                                            <label for="employmentLevel" class="uname" > Select your current Employment Level</label>
+                                            <select name="employmentLevel">
+                                                <%
+                                                    List<EmploymentLevel> listEmp = ManagerDAO.searchAll(new EmploymentLevel());
+                                                    for (EmploymentLevel el : listEmp) {
+                                                %>
+                                                <option value="<%=el.getIdLevelOfEmployment()%>"><%=el.getEmploymentLevel()%></option>
+                                                <%}%>
+
+                                            </select>
+                                        </p>
 
 
                                     </div><!-- Left grid -->
@@ -177,12 +133,17 @@
                                             <label for="usernamesignup" class="uname" data-icon="p">   Post Code</label>
                                             <input id="postcode" name="postcode" required type="text" placeholder="">
                                         </p>
+                                        <p> 
+                                                <label for="postcodeStart">Postcode Start</label>
+                                                <input id="postcodeStart" name="postcodeStart" required type="text">
+                                            </p>
 
 
                                         <p> 
                                             <label for="personalUrl" class="uname" data-icon="u">  Personal URL</label>
                                             <input id="personalUrl" name="personalurl" type="url" placeholder="">
                                         </p>
+                                         
 
 
 
@@ -210,20 +171,85 @@
 
 
 
-                                        <p> 
-                                            <label for="employmentLevel" class="uname" > Select your current Employment Level</label>
-                                            <select name="employmentLevel">
-                                                <%
-                                                    List<EmploymentLevel> listEmp = ManagerDAO.searchAll(new EmploymentLevel());
-                                                    for (EmploymentLevel el : listEmp) {
-                                                %>
-                                                <option value="<%=el.getIdLevelOfEmployment()%>"><%=el.getEmploymentLevel()%></option>
-                                                <%}%>
-
-                                            </select>
-                                        </p>
+                                        
 
                                     </div>  <!-- Right Grid ends -->
+                                    <div class="grid_16 experiences">
+                                     <h3>Basic Educational Information</h3>
+<!--align four divs inline-->
+                                <div class="container_tbl">
+
+                                    <div class="grid_2_c1">
+                                        <p> 
+                                            <label for="NoofGCSESpasses" > No of GCSEs Passes</label>
+                                            <input id="NoofGCSESpasses" name="NoofGCSESpasses" required type="number" placeholder="5">
+                                        </p>
+                                    </div>
+                                    <div class="grid_2_c2">
+                                        <p> 
+                                            <label for="GCSEEnglishGrade">GCSE English Grade </label>
+                                            <input id="GCSEEnglishGrade" name="GCSEEnglishGrade" type="text" placeholder="A*">
+                                        </p>
+                                    </div>
+
+                                    <div class="grid_2_c3">
+                                        <p> 
+                                            <label for="GCSEMathsGrade" >GCSE Maths Grade </label>
+                                            <input id="GCSEMathsGrade" name="GCSEMathsGrade" type="text" placeholder="A">
+                                        </p>
+                                    </div>
+
+                                    <div class="grid_2_c4">
+                                        <p> 
+                                            <label for="fiveOrMoreGCSES" >  Five or More GCSEs passes</label>
+                                            <input id="fiveOrMoreGCSES" name="fiveOrMoreGCSES" required type="checkbox" placeholder="">
+                                        </p>
+                                    </div>
+
+                                </div>
+                                <div class="container_tbl">
+                                    <div class="grid_2_c1">
+                                        <p>    
+
+                                            <label for="noOfAlevels" > No Of A-levels</label>
+                                            <input id="noOfAlevels" name="noOfAlevels" type="number" placeholder="1">
+                                        </p>
+                                    </div>
+                                    <div class="grid_2_c2">
+                                        <p> 
+                                            <label for="ucasPoints">UCAS Points </label>
+                                            <input id="ucasPoints" name="ucasPoints" type="number" placeholder="145">
+                                        </p>
+                                    </div>
+                                </div>
+                                    </div><!--basic edu ends-->
+                                         <div class="grid_16">
+                                    <h3>Other Information</h3>
+                                    <p> 
+                                        <label for="authorityToWorkStatement">Work Statement </label>
+                                        <input id="authorityToWorkStatement" name="authorityToWorkStatement" type="text" placeholder="List restrictions on work, e.g. max 20 hours per week">
+                                    </p>
+                                    <div class="container_tbl">
+                                        <div class="grid_2_c1">
+                                            <p> 
+                                                <label for="legallyBond">Legally Bond</label>
+                                                <input id="legallyBond" name="legallyBond" type="checkbox">
+                                            </p>
+                                        </div>
+                                        <div class="grid_2_c2">
+                                           
+                                        </div>
+                                        <div class="grid_2_c4">
+                                            <p> 
+                                                <label for="penaltyPoints">Penalty Points</label>
+                                                <input id="penaltyPoints" name="penaltyPoints" type="number">
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    
+
+                                </div>
                                 </div>
 
                                 <!-- Login Details -->

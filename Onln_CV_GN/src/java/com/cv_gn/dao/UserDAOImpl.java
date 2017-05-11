@@ -28,19 +28,20 @@ public class UserDAOImpl {
         Criteria cr = ManagerDAO.openDBSession().createCriteria(com.cv_gn.model.User.class);
         cr.add(Restrictions.eq("username", username));
         User u = (User) cr.uniqueResult();
+        System.out.println(u.getPassword());
         return u;
     }
 
-    public User isUserPassswordCorrect(String password, User usr) {
-        User ulok = null;
+    public String isUserPassswordCorrect(String password, User usr) {
+        String ulok = "";
 
         try {
             System.out.println("mmm");
             if (password.equals(ManagerDAO.decrypt(usr.getPassword()))) {
-                ulok = usr;
+                ulok = "correct";
                 System.out.println("nnnn");
             } else {
-                ulok = null;
+                ulok = "wrong";
             }
         } catch (Exception e) {
             System.out.println("" + e.getMessage());
@@ -49,4 +50,11 @@ public class UserDAOImpl {
         return ulok;
     }
 
+    public static void main(String[] args) {
+        User us=null;
+        User userAvailable = new UserDAOImpl().isUserAvailable("ganithperera@outlook.com");
+       // User u=new UserDAOImpl().isUserPassswordCorrect("123456", userAvailable);
+       // System.out.println("New user="+u.getIdUser());
+        
+    }
 }

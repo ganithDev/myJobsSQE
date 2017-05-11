@@ -56,9 +56,11 @@ public class UserRegistrationController extends HttpServlet {
 
             String title = "", firstName = "", secondName = "", surName = "", addressLine1 = "",
                     addressLine2 = "", town = "", postcode = "", secondEmail = "", personalUrl = "", photo = "",
-                    studentStatus = "", mobile = "", landLine = "", dob = "", userEmail = "", password = "", contactPreference = "", empLevel = "", msg
-                    = "";
-            //initializing the varibales from the values submitted from registerUser
+                    studentStatus = "", mobile = "", landLine = "", dob = "", userEmail = "", password = "", contactPreference = "",
+                    empLevel = "", msg = "", postcodeStart = "SL", authorityToWorkStatement = "", gcseEnglishGrade = "", gcseMathsGrade = "";
+            Short noOfGces = 0, ucasPoints = 0, noOfAlevels = 0, penaltyPoints = 0;
+            boolean fiveOrMoreGCSES = true, legallyBond = true;
+//initializing the varibales from the values submitted from registerUser
             title = request.getParameter("title");
             firstName = request.getParameter("firstName");
             secondName = request.getParameter("secondName");
@@ -78,14 +80,28 @@ public class UserRegistrationController extends HttpServlet {
             password = request.getParameter("password");
             contactPreference = request.getParameter("preferredContactMode");
             empLevel = request.getParameter("employmentLevel");
+            noOfGces = Short.parseShort(request.getParameter("NoofGCSESpasses"));
+            gcseEnglishGrade = request.getParameter("GCSEEnglishGrade");
+            gcseMathsGrade = request.getParameter("GCSEMathsGrade");
+            noOfAlevels = Short.parseShort(request.getParameter("noOfAlevels"));
+            ucasPoints = Short.parseShort(request.getParameter("ucasPoints"));
+            authorityToWorkStatement = request.getParameter("authorityToWorkStatement");
+            penaltyPoints = Short.parseShort(request.getParameter("penaltyPoints"));
+      
+            if (request.getParameter("fiveOrMoreGCSES")==null) {
+                fiveOrMoreGCSES = false;
+            } else {
+                fiveOrMoreGCSES = true;
+            }
+            if (request.getParameter("legallyBond")==null) {
+                legallyBond = false;
+            } else {
+                legallyBond = true;
+            }
             Date birthDay = null;
-//Need to define at registration or other approach
-            String postcodeStart = "SL", authorityToWorkStatement = "authorityToWorkStatement", gcseEnglishGrade = "A", gcseMathsGrade = "B";
-            //  Short noOfGcses=0, String , String gcseMathsGrade, Boolean fiveOrMoreGcses, Short noOfAlevels, Short ucasPoints, String studentStatus, String mobile, String landline, Date dob, Short penaltyPoints, Set<Referee> referees, Set<SkillPerson> skillPersons, Set<EducationalQualification> educationalQualifications, Set<Experience> experiences, Set<ProfessionalQualification> professionalQualifications, Set<JobPreference> jobPreferences)
-
             //Validate User available
             if ("".equals(title) || "".equals(firstName) || "".equals(surName) || "".equals(addressLine1) || "".equals(town) || "".equals(postcode) || "".equals(secondEmail) || "".equals(mobile) || "".equals(dob)
-                    || "".equals(userEmail) || "".equals(password)) {
+                    || "".equals(userEmail) || "".equals(password) || "".equals(noOfGces)) {
                 msg = "Required field or fields empty";
                 System.out.println("Required field or fields empty");
                 response.sendRedirect("registerUser.jsp?msg=" + msg);
@@ -119,15 +135,12 @@ public class UserRegistrationController extends HttpServlet {
                 birthDay = new SimpleDateFormat("yyyy-MM-dd").parse(dob);
                 System.out.println("date=" + birthDay);
                 Person person = null;
-                Boolean fm = Boolean.FALSE;
-                out.println("female=" + fm);
-                Short noOfGces = 5, ucasPoints = 10, noOfAlevels = 2, penaltyPoints = 11;//Need to define at registration or other approach
 
                 //Create the Person object
                 out.println("Create the Person object");
                 person = new Person(employmentLevel, pcm, personStatus, personTitle, user, firstName, secondName, surName, addressLine1, addressLine2, town, postcode,
-                        secondEmail, personalUrl, photo, Boolean.FALSE, postcodeStart, authorityToWorkStatement, noOfGces,
-                        gcseEnglishGrade, gcseMathsGrade, Boolean.FALSE, noOfAlevels, ucasPoints, mobile, landLine, birthDay,
+                        secondEmail, personalUrl, photo, legallyBond, postcodeStart, authorityToWorkStatement, noOfGces,
+                        gcseEnglishGrade, gcseMathsGrade, fiveOrMoreGCSES, noOfAlevels, ucasPoints, mobile, landLine, birthDay,
                         penaltyPoints, referees, skillPersons, educationalQualifications, experiences, professionalQualifications,
                         jobPreferences);
 
@@ -135,7 +148,7 @@ public class UserRegistrationController extends HttpServlet {
                 out.println("Pass person");
                 String addPerson = new PersonDAOImpl().addPerson(user, person, personStatus, personTitle, pcm);
                 if (addPerson.equals("success")) {
-                    response.sendRedirect("home.jsp");
+                    response.sendRedirect("login.jsp");
                 } else {
                     response.sendRedirect("registerUser.jsp?msg=" + addPerson);
                 }
