@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 1, 2017 11:12:08 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.cv_gn.model.UserType" table="user_type" catalog="mymscsqeprocv_db" optimistic-lock="version">
+        <id name="idUserType" type="java.lang.Short">
+            <column name="idUser_type" />
+            <generator class="identity" />
+        </id>
+        <property name="userType" type="string">
+            <column name="user_type" length="20" not-null="true" />
+        </property>
+        <set name="users" table="user" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idUser_type" not-null="true" />
+            </key>
+            <one-to-many class="com.cv_gn.model.User" />
+        </set>
+    </class>
+</hibernate-mapping>

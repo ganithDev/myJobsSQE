@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 1, 2017 11:12:08 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.cv_gn.model.Sector" table="sector" catalog="mymscsqeprocv_db" optimistic-lock="version">
+        <id name="idSector" type="java.lang.Short">
+            <column name="idSector" />
+            <generator class="identity" />
+        </id>
+        <property name="sectorTitle" type="string">
+            <column name="sectorTitle" length="45">
+                <comment>e.g. from http://www.reed.co.uk/ industry and non-commercial job sectors</comment>
+            </column>
+        </property>
+        <set name="jobTitles" table="job_title" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Sector_idSector" not-null="true" />
+            </key>
+            <one-to-many class="com.cv_gn.model.JobTitle" />
+        </set>
+        <set name="professionalQualifications" table="professional_qualification" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idSector" not-null="true" />
+            </key>
+            <one-to-many class="com.cv_gn.model.ProfessionalQualification" />
+        </set>
+    </class>
+</hibernate-mapping>

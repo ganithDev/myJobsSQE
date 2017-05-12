@@ -11,6 +11,7 @@ import com.cv_gn.model.EducationalQualification;
 import com.cv_gn.model.EmploymentLevel;
 import com.cv_gn.model.Experience;
 import com.cv_gn.model.JobPreference;
+import com.cv_gn.model.JobTitle;
 import com.cv_gn.model.Person;
 import com.cv_gn.model.PersonContactMode;
 import com.cv_gn.model.PersonStatus;
@@ -51,13 +52,14 @@ public class UserRegistrationController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, Exception {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        PrintWriter out = response.getWriter();
+        try  {
             /* declaring the varibles */
 
             String title = "", firstName = "", secondName = "", surName = "", addressLine1 = "",
                     addressLine2 = "", town = "", postcode = "", secondEmail = "", personalUrl = "", photo = "",
                     studentStatus = "", mobile = "", landLine = "", dob = "", userEmail = "", password = "", contactPreference = "",
-                    empLevel = "", msg = "", postcodeStart = "SL", authorityToWorkStatement = "", gcseEnglishGrade = "", gcseMathsGrade = "";
+                    empLevel = "",jobPrefered="", msg = "", postcodeStart = "SL", authorityToWorkStatement = "", gcseEnglishGrade = "", gcseMathsGrade = "";
             Short noOfGces = 0, ucasPoints = 0, noOfAlevels = 0, penaltyPoints = 0;
             boolean fiveOrMoreGCSES = true, legallyBond = true;
 //initializing the varibales from the values submitted from registerUser
@@ -80,6 +82,8 @@ public class UserRegistrationController extends HttpServlet {
             password = request.getParameter("password");
             contactPreference = request.getParameter("preferredContactMode");
             empLevel = request.getParameter("employmentLevel");
+             jobPrefered = request.getParameter("jobPrefered");
+           
             noOfGces = Short.parseShort(request.getParameter("NoofGCSESpasses"));
             gcseEnglishGrade = request.getParameter("GCSEEnglishGrade");
             gcseMathsGrade = request.getParameter("GCSEMathsGrade");
@@ -127,6 +131,11 @@ public class UserRegistrationController extends HttpServlet {
                 personTitle.setIdpersonTitle(Integer.parseInt(title));
                 PersonContactMode pcm = new PersonContactMode();
                 pcm.setIdcontactPreference(Integer.parseInt(contactPreference));
+                
+               JobPreference jb=new JobPreference();
+                JobTitle jobTitle=new JobTitle();
+            jobTitle.setIdJobTitle(Short.parseShort(jobPrefered));
+                       
 
 //Create the User object
                 User user = new User(userType, userEmail, password);
@@ -146,17 +155,17 @@ public class UserRegistrationController extends HttpServlet {
 
                 //Pass person,user objects to addPerson 
                 out.println("Pass person");
-                String addPerson = new PersonDAOImpl().addPerson(user, person, personStatus, personTitle, pcm);
-                if (addPerson.equals("success")) {
+                String addPersonID = new PersonDAOImpl().addPerson(user, person, personStatus, personTitle, pcm);
+                String addJobPreference = new PersonDAOImpl().addJobPreference(Integer.parseInt(addPersonID), jobTitle);
+                if (!"".equals(addPersonID) && "success".equals(addJobPreference)) {
                     response.sendRedirect("login.jsp");
                 } else {
-                    response.sendRedirect("registerUser.jsp?msg=" + addPerson);
+                    response.sendRedirect("registerUser.jsp?msg=" + addPersonID);
                 }
 
-                Referee referee1 = null, referee2 = null;
-                // referee1 = new Referee(person, "Mr.", "Alex", "Stuart", "alx@yahoo.com", "845784", "employer", Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, "referee contacted by email", "path1");
-                ///referee2 = new Referee(person, "Mr.", "Ray", "Fernando", "ray@yahoo.com", "878954", "academic", Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, "referee contacted by mobile", "path2");
             }
+        }catch(Exception e){
+        out.println("Exp="+e.getMessage());
         }
     }
 

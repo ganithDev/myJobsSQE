@@ -48,7 +48,9 @@ public class SaveEducationalQualification extends HttpServlet {
             nameOfInstitution = request.getParameter("nameOfInstitution");
             country = request.getParameter("country");
             yearObtained = request.getParameter("yearObtained");
-              yearObtained = request.getParameter("result");
+              result = request.getParameter("result");
+                 thesesTitle = request.getParameter("thesesTitle");
+              
              if (vocational==null) {
                 vocationalQl = false;
             } else {
@@ -58,7 +60,7 @@ public class SaveEducationalQualification extends HttpServlet {
              
             yrObtained = new SimpleDateFormat("yyyy-MM-dd").parse(yearObtained);
                 System.out.println("date=" + yrObtained);
-                Person p=new Person();
+                Person p=new PersonDAOImpl().getPersonFromUser(usr);
                 EducationLevel el=new EducationLevel();
                 el.setIdEducationLevel(Short.parseShort(qualificationType));
                 EducationalQualification eq=new EducationalQualification(el, p, "", courseName, "", vocationalQl, mainSubject, nameOfInstitution, country, yrObtained, result, thesesTitle, true, "");
@@ -74,7 +76,7 @@ public class SaveEducationalQualification extends HttpServlet {
                    
             }
         } catch (Exception e) {
-            out.println("yr=");
+            out.println("excep="+e.getMessage());
         }
              
         

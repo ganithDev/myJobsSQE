@@ -5,6 +5,7 @@
  */
 package com.cv_gn.dao;
 
+import com.cv_gn.model.JobTitle;
 import com.cv_gn.model.OnlnCVHiberUtil;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -16,6 +17,8 @@ import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.PBEParameterSpec;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Restrictions;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
@@ -72,6 +75,14 @@ public class ManagerDAO {
         return new BASE64Decoder().decodeBuffer(property);
 
     }
+    
+    public List<JobTitle> listJobTitles(String jobTitle){
+    Criteria cr=ManagerDAO.openDBSession().createCriteria(JobTitle.class);
+    cr.add(Restrictions.like("jobTitle", jobTitle, MatchMode.START));
+    return cr.list();
+    }
+           
+    
     public static void main(String[] args) {
         try {
             System.out.println(ManagerDAO.encrypt("abc123"));;

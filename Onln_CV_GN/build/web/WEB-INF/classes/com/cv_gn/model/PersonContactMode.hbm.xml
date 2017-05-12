@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 1, 2017 11:12:08 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.cv_gn.model.PersonContactMode" table="person_contact_mode" catalog="mymscsqeprocv_db" optimistic-lock="version">
+        <id name="idcontactPreference" type="java.lang.Integer">
+            <column name="idcontactPreference" />
+            <generator class="identity" />
+        </id>
+        <property name="contactMode" type="string">
+            <column name="contactMode" length="45" not-null="true">
+                <comment>'Mobile','Landline','Email1','Email2' mobile\nlandline\nemail1 (username)\nemail2 (secondEmail)</comment>
+            </column>
+        </property>
+        <set name="persons" table="person" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idcontactPreference" not-null="true" />
+            </key>
+            <one-to-many class="com.cv_gn.model.Person" />
+        </set>
+    </class>
+</hibernate-mapping>

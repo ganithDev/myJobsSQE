@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 1, 2017 11:12:08 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.cv_gn.model.JobPreference" table="job_preference" catalog="mymscsqeprocv_db" optimistic-lock="version">
+        <id name="idJobPreference" type="java.lang.Integer">
+            <column name="idJob_preference" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="jobTitle" class="com.cv_gn.model.JobTitle" fetch="select">
+            <column name="idJobTitle" not-null="true" />
+        </many-to-one>
+        <many-to-one name="person" class="com.cv_gn.model.Person" fetch="select">
+            <column name="idPerson" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>
