@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 06, 2017 at 06:37 AM
+-- Generation Time: May 12, 2017 at 03:34 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -43,6 +43,13 @@ CREATE TABLE `educational_qualification` (
   `howVerified` varchar(45) DEFAULT NULL COMMENT 'who checked and how',
   `idPerson` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='post 16 Academic and Vocational - not Professional';
+
+--
+-- Dumping data for table `educational_qualification`
+--
+
+INSERT INTO `educational_qualification` (`idEducationalQualification`, `qualificationType`, `courseName`, `idEducationLevel`, `otherEducationLevel`, `vocational`, `mainSubject`, `nameOfInstitution`, `country`, `yearObtained`, `result`, `thesesTitle`, `verified`, `howVerified`, `idPerson`) VALUES
+(1, '', 'Software Engineering', 1, '', 0, 'Computer Programming', 'Cardiff Universoty', 'United Kingdom', '2016-05-12', 'First class', '', 1, '', 6);
 
 -- --------------------------------------------------------
 
@@ -110,6 +117,13 @@ CREATE TABLE `experience` (
   `howVerified` varchar(45) DEFAULT NULL,
   `idLevelOfEmployment` smallint(4) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='work experience';
+
+--
+-- Dumping data for table `experience`
+--
+
+INSERT INTO `experience` (`idExperience`, `idPerson`, `dateStarted`, `dateFinished`, `JobTitles_idJobTitles`, `otherJobTitle`, `keyDuties`, `employerName`, `verified`, `howVerified`, `idLevelOfEmployment`) VALUES
+(1, 4, '2015-05-01', '2017-05-01', 21, 'SE', 'PEGA development, Java programming', 'Virtusa', 1, '', 1);
 
 -- --------------------------------------------------------
 
@@ -196,7 +210,11 @@ CREATE TABLE `person` (
 INSERT INTO `person` (`idPerson`, `idUser`, `idperson_title`, `forename1`, `forename2`, `surname`, `addressLine1`, `addressLine2`, `town`, `postcode`, `secondEmail`, `personalUrl`, `photo`, `female`, `postcodeStart`, `authorityToWorkStatement`, `idcontactPreference`, `noOfGcses`, `gcseEnglishGrade`, `gcseMathsGrade`, `fiveOrMoreGcses`, `noOfAlevels`, `ucasPoints`, `idperson_status`, `mobile`, `landline`, `dob`, `penaltyPoints`, `idLevelOfEmployment`) VALUES
 (1, 1, 1, 'ganith', 'dithula', 'perera', '71, 1 lane', 'Katubadde', 'Moratuwa', '10400', 'gani@ya.com', 'null', 'SKLL0274_EDT.JPG', 0, 'SL', 'authorityToWorkStatement', 1, 5, 'A', 'B', 0, 2, 10, 2, '0712281744', '0112587744', '1991-09-21', 11, 1),
 (2, 2, 3, 'Naduni', '', 'Pulsarani', '12, Wolk street', '', 'Baybrook', '21331', 'hjk@gh.com', NULL, '', 0, 'SL', 'authorityToWorkStatement', 1, 5, 'A', 'B', 0, 2, 10, 1, '0758895588', '0112558877', '1991-06-28', 11, 1),
-(3, 3, 3, 'Naduni', '', 'Pulsarani', '12, Wolk street', '', 'Baybrook', '21331', 'hjk@gh.com', NULL, '', 0, 'SL', 'authorityToWorkStatement', 1, 5, 'A', 'B', 0, 2, 10, 1, '0758895588', '0112558877', '1991-06-28', 11, 1);
+(3, 3, 3, 'Naduni', '', 'Pulsarani', '12, Wolk street', '', 'Baybrook', '21331', 'hjk@gh.com', NULL, '', 0, 'SL', 'authorityToWorkStatement', 1, 5, 'A', 'B', 0, 2, 10, 1, '0758895588', '0112558877', '1991-06-28', 11, 1),
+(4, 4, 1, 'John', '', 'Smith', '12, Main street', '', 'Lankershire', '789987', 'asd@we.com', NULL, '', 0, 'SL', 'authorityToWorkStatement', 1, 5, 'A', 'B', 0, 2, 10, 1, '0785555555', '0112666888', '1991-06-28', 11, 3),
+(5, 5, 1, 'rex', '', 'fern', '23,fox hill', '', 'Ustershire', '88', 'dfg@df.com', NULL, '', 1, 'SL', '40 hrs per week', 1, 5, 'A', 'A', 0, 5, 150, 3, '7877788787', '', '1989-05-03', 11, 4),
+(6, 6, 1, 'mary', '', 'sad', '123,River side', '', 'Thames', '559879', 'fgh@fg.com', NULL, '', 1, 'SL', '', 1, 5, 'A', 'C', 0, 1, 156, 1, '5896555555', '', '1990-05-10', 10, 1),
+(7, 7, 1, 'ash', '', 'rask', '22, New Islands', '', 'Hamshire', '8789797', 'abc@we.com', NULL, '', 0, 'SL', '', 1, 7, 'A', 'B*', 1, 26879, 174, 1, '1747788995', '', '1989-05-11', 10, 3);
 
 -- --------------------------------------------------------
 
@@ -278,6 +296,13 @@ CREATE TABLE `professional_qualification` (
   `idPerson` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `professional_qualification`
+--
+
+INSERT INTO `professional_qualification` (`idProfessionalQualification`, `qualificationName`, `idSector`, `awardingBody`, `yearObtained`, `classification`, `verified`, `howVerified`, `idPerson`) VALUES
+(1, 'Pega CSSA', 1, 'Pega Systems Inc.', '2016-05-17', 'Pass', 1, '', 4);
+
 -- --------------------------------------------------------
 
 --
@@ -299,6 +324,13 @@ CREATE TABLE `referee` (
   `howVerified` varchar(45) DEFAULT NULL COMMENT 'referee contacted by email/phone/letter',
   `referenceDoc` text COMMENT 'uploaded scanned reference?'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='need to check data protection for referee data';
+
+--
+-- Dumping data for table `referee`
+--
+
+INSERT INTO `referee` (`idReferee`, `idPerson`, `title`, `forename`, `surname`, `email`, `contactPhone`, `idreferee_relationship`, `permissionToContact`, `permissionToStoreDetail`, `verified`, `howVerified`, `referenceDoc`) VALUES
+(1, 4, 'Mr.', 'Mark', 'Seth', 'seth@we.com', '1234567899', 1, 1, 1, 1, '', '');
 
 -- --------------------------------------------------------
 
@@ -408,6 +440,13 @@ CREATE TABLE `skill_person` (
   `howVerified` varchar(45) DEFAULT NULL COMMENT 'reference, ER test or other evidence of competence'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `skill_person`
+--
+
+INSERT INTO `skill_person` (`idSkill_person`, `idPerson`, `idSkill`, `idskill_level`, `verified`, `howVerified`) VALUES
+(0, 4, 1, 2, 1, '');
+
 -- --------------------------------------------------------
 
 --
@@ -427,9 +466,13 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`idUser`, `username`, `password`, `registerDate`, `idUser_type`) VALUES
-(1, 'ganithperera@outlook.com', '123456', '2017-04-12 15:27:12', 1),
-(2, 'naduni@gmail.com', '147741', '2017-05-06 03:49:41', 1),
-(3, 'naduni@il.com', '147741', '2017-05-06 03:58:37', 1);
+(1, 'ganithperera@outlook.com', '+nkCcN8TzMM=', '2017-04-12 15:27:12', 3),
+(2, 'naduni@gmail.com', 'wR9m/LF9bSk=', '2017-05-06 03:49:41', 2),
+(3, 'naduni@il.com', 'WnatjqL5B1I=', '2017-05-06 03:58:37', 1),
+(4, 'john@gmail.com', '6vp7xNVrVFE=', '2017-05-07 14:12:16', 1),
+(5, 'rex@cn.com', '112233', '2017-05-11 12:20:23', 1),
+(6, 'man@wrl.com', 'w8y/IR0jROU=', '2017-05-11 12:55:45', 1),
+(7, 'ash@gml.com', '/o2Kfj1Pifk=', '2017-05-11 13:18:58', 1);
 
 -- --------------------------------------------------------
 
@@ -600,7 +643,7 @@ ALTER TABLE `user_type`
 -- AUTO_INCREMENT for table `educational_qualification`
 --
 ALTER TABLE `educational_qualification`
-  MODIFY `idEducationalQualification` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `idEducationalQualification` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `education_level`
 --
@@ -615,7 +658,7 @@ ALTER TABLE `employment_level`
 -- AUTO_INCREMENT for table `experience`
 --
 ALTER TABLE `experience`
-  MODIFY `idExperience` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `idExperience` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `job_preference`
 --
@@ -630,7 +673,7 @@ ALTER TABLE `job_title`
 -- AUTO_INCREMENT for table `person`
 --
 ALTER TABLE `person`
-  MODIFY `idPerson` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idPerson` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `person_contact_mode`
 --
@@ -650,12 +693,12 @@ ALTER TABLE `person_title`
 -- AUTO_INCREMENT for table `professional_qualification`
 --
 ALTER TABLE `professional_qualification`
-  MODIFY `idProfessionalQualification` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `idProfessionalQualification` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `referee`
 --
 ALTER TABLE `referee`
-  MODIFY `idReferee` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `idReferee` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `referee_relationship`
 --
@@ -680,7 +723,7 @@ ALTER TABLE `skill_level`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `idUser` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idUser` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `user_type`
 --
