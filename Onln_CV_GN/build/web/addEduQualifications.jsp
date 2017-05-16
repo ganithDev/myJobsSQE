@@ -14,7 +14,7 @@
             User u = (User) session.getAttribute("JobSeeker");
             List<EducationalQualification> eduLst = new PersonDAOImpl().loadEduQualification(u);
             if (eduLst.size() == 0) {%>
-    <p>No Experience to show</p>
+    <p>No Educational Qualifications to show</p>
     <%
 } else {%>
     <div class="container_tbl">

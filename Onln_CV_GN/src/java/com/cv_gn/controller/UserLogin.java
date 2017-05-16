@@ -27,24 +27,24 @@ public class UserLogin extends HttpServlet {
                 HttpSession hs = request.getSession();
                 String username = "", password = "";
                 username = request.getParameter("userEmail");
-                out.write("usrnm="+username);
+                out.write("usrnm=" + username);
                 password = request.getParameter("password");
-                User u = new UserDAOImpl().isUserAvailable(username);
+                User u = (User) new UserDAOImpl().isUserAvailable(username);
                 if (u == null) {
                     response.sendRedirect("login.jsp?msg=Please insert your valid username.");
                 } else {
-                    String userOk = new UserDAOImpl().isUserPassswordCorrect(password, u);
-                    if (userOk.equals("wrong")) {
+                    User userOk = (User) new UserDAOImpl().isUserPassswordCorrect(password, u);
+                    if (userOk == null) {
                         response.sendRedirect("login.jsp?msg=Please insert your valid password.");
                     } else {
-                        if (u.getUserType().getUserType().equals("Admin")) {
-                            hs.setAttribute("Admin", u);
-                           response.sendRedirect("adminPanel.jsp");
-                        } else if (u.getUserType().getUserType().equals("Agency")) {
-                            hs.setAttribute("Agency", u);
+                        if (u.getUserType().getIdUserType() == 3) {
+                            hs.setAttribute("Admin", userOk);
+                            response.sendRedirect("adminPanel.jsp");
+                        } else if (u.getUserType().getIdUserType() == 2) {
+                            hs.setAttribute("Agency", userOk);
                             response.sendRedirect("searchCV.jsp");
-                        } else {
-                            hs.setAttribute("JobSeeker", u);
+                        } else if (u.getUserType().getIdUserType() == 3) {
+                            hs.setAttribute("JobSeeker", userOk);
                             response.sendRedirect("profile.jsp");
                         }
                     }

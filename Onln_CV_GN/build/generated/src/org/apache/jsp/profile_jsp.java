@@ -3,6 +3,8 @@ package org.apache.jsp;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
+import com.cv_gn.model.Person;
+import com.cv_gn.dao.PersonDAOImpl;
 import com.cv_gn.model.User;
 
 public final class profile_jsp extends org.apache.jasper.runtime.HttpJspBase
@@ -53,13 +55,15 @@ public final class profile_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("\n");
       out.write("\n");
+      out.write("\n");
+      out.write("\n");
       out.write("<!DOCTYPE html>\n");
 
     if (session.getAttribute("JobSeeker") == null) {
         response.sendRedirect("login.jsp");
     } else {
-
-
+User u=(User)session.getAttribute("JobSeeker");
+Person p= new PersonDAOImpl().getPersonFromUser(u);
 
       out.write("\n");
       out.write("<html>\n");
@@ -107,12 +111,15 @@ public final class profile_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                            <div class=\"grid_16 experiences\"><!-- Bottom Grid  -->\n");
       out.write("\n");
       out.write("                                <div class=\"grid_16\">\n");
+      out.write("                                    <h3>Welcome ");
+      out.print(  p.getPersonTitle().getTitle() + "." + p.getForename1() + " " + p.getSurname() );
+      out.write("</h3>\n");
       out.write("                                    <div class=\"grid_8 apropos\"> <h3>Educational Qualifications</h3>\n");
       out.write("                                    </div>\n");
       out.write("                                    <div class=\"grid_6\">\n");
       out.write("\n");
       out.write("                                        <p class=\"signin button\"> \n");
-      out.write("                                            <input id=\"addEduQl\" name=\"AddUser\" type=\"button\" value=\"Add\" onclick=\"loadEducationalQualificationForm()\"/>\n");
+      out.write("                                            <input id=\"addEduQl\" name=\"ShowUser\" type=\"button\" value=\"Show\" onclick=\"loadEducationalQualificationForm()\"/>\n");
       out.write("\n");
       out.write("                                    </div>\n");
       out.write("\n");
@@ -127,7 +134,7 @@ public final class profile_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                                    <div class=\"grid_6\">\n");
       out.write("\n");
       out.write("                                        <p class=\"signin button\"> \n");
-      out.write("                                            <input id=\"addProfQl\" name=\"AddUser\" type=\"submit\" value=\"Add\" onclick=\"loadProfessionalQualificationForm()\"/>\n");
+      out.write("                                            <input id=\"addProfQl\" name=\"ShowUser\" type=\"button\" value=\"Show\" onclick=\"loadProfessionalQualificationForm()\"/>\n");
       out.write("\n");
       out.write("                                    </div>\n");
       out.write("\n");
@@ -141,7 +148,7 @@ public final class profile_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                                    <div class=\"grid_6\">\n");
       out.write("\n");
       out.write("                                        <p class=\"signin button\"> \n");
-      out.write("                                            <input id=\"addEcprnc\" name=\"AddUser\" type=\"submit\" value=\"Add\" onclick=\"loadExperienceForm()\"/>\n");
+      out.write("                                            <input id=\"addEcprnc\" name=\"ShowUser\" type=\"button\" value=\"Show\" onclick=\"loadExperienceForm()\"/>\n");
       out.write("\n");
       out.write("                                    </div>\n");
       out.write("\n");
@@ -157,7 +164,7 @@ public final class profile_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                                    <div class=\"grid_6\">\n");
       out.write("\n");
       out.write("                                        <p class=\"signin button\"> \n");
-      out.write("                                            <input id=\"addSkills\" name=\"AddUser\" type=\"submit\" value=\"Add\" onclick=\"loadSkillForm()\"/>\n");
+      out.write("                                            <input id=\"addSkills\" name=\"ShowUser\" type=\"button\" value=\"Show\" onclick=\"loadSkillForm()\"/>\n");
       out.write("\n");
       out.write("                                    </div>\n");
       out.write("                                   \n");
@@ -171,7 +178,7 @@ public final class profile_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                                    <div class=\"grid_6\">\n");
       out.write("\n");
       out.write("                                        <p class=\"signin button\"> \n");
-      out.write("                                            <input id=\"addReferee\" name=\"AddUser\" type=\"submit\" value=\"Add\" onclick=\"loadRefereeDetailForm()\"/>\n");
+      out.write("                                            <input id=\"addReferee\" name=\"ShowUser\" type=\"button\" value=\"Show\" onclick=\"loadRefereeDetailForm()\"/>\n");
       out.write("\n");
       out.write("                                    </div>\n");
       out.write("                                   \n");
@@ -182,8 +189,18 @@ public final class profile_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                                \n");
       out.write("                               \n");
       out.write("                            </div><!--grid 16 Bottom Grid ends -->\n");
+      out.write("                            <div class=\"grid_16 experiences\"><!--Generate CV to PDF-->\n");
+      out.write("                                \n");
+      out.write("                                    <div class=\"grid_8 competences\">\n");
+      out.write("                                        <form action=\"profilePreview.jsp\" method=\"Get\">\n");
+      out.write("                                            <p class=\"signin button\">  <input type=\"submit\" value=\"Preview\"/></p>\n");
+      out.write("                                        </form>\n");
+      out.write("                                \n");
+      out.write("                            </div>\n");
       out.write("                        </section><!--Contain design related to two grids-->\n");
-      out.write("                    </div></div></div>\n");
+      out.write("                    </div></div>\n");
+      out.write("                        \n");
+      out.write("            </div>\n");
       out.write("        </section>\n");
       out.write("    </body>\n");
       out.write("    ");

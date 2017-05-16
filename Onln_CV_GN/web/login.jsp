@@ -32,7 +32,7 @@ response.sendRedirect("profile.jsp");
                        
 
                         <div id="register" class="animate form">
-                            <form method="POST" action="UserLogin?actionType=LoginUser" novalidate id="login-form">
+                            <form method="POST" action="UserSigin?actionType=LoginUser" novalidate id="login-form">
                                 <h1> Signin </h1>
                                
                                 <p> 

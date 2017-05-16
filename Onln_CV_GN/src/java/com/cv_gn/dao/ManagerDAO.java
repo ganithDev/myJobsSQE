@@ -85,7 +85,7 @@ public class ManagerDAO {
     
     public static void main(String[] args) {
         try {
-            System.out.println(ManagerDAO.encrypt("abc123"));;
+            System.out.println(ManagerDAO.encrypt("112233"));
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

@@ -35,7 +35,7 @@
 /*  height: 1000px;*/
 }
 .container_tbl{
-    width: 92%;
+    width: 100%;
     display: inline-table;
     padding-bottom: 20px;
 }
@@ -61,6 +61,13 @@
     margin-left: 5%;
 }
 .container_tbl .grid_2_c4{
+    display: inline;
+    display: inline-block;
+    position: relative;   
+    width: 20%;
+    margin-left: 5%;
+}
+.container_tbl .grid_2_c5{
     display: inline;
     display: inline-block;
     position: relative;   

@@ -52,21 +52,35 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\r\n");
       out.write("\r\n");
       out.write("<!DOCTYPE html>\r\n");
+
+if(session.getAttribute("Admin")!=null){
+response.sendRedirect("adminPanel.jsp");    
+}else if(session.getAttribute("Agency")!=null){
+response.sendRedirect("searchCV.jsp");
+}else if(session.getAttribute("JobSeeker")!=null){
+response.sendRedirect("profile.jsp");
+}else{
+
+      out.write("\r\n");
       out.write("<html>\r\n");
       out.write("    <head>\r\n");
       out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\r\n");
       out.write("        <title>Sigin | RecruitMe</title>\r\n");
       out.write("        ");
-      out.write(" <link rel=\"stylesheet\" type=\"text/css\" href=\"CSS_styl/Top_Foot.css\"><!--Used for form design-->\n");
-      out.write("        \n");
-      out.write("        <link rel=\"stylesheet\" type=\"text/css\" href=\"CSS_styl/formBody.css\"><!--Used for form design-->\n");
-      out.write("        <link rel=\"stylesheet\" type=\"text/css\" href=\"CSS_styl/gridLayouts.css\"><!--Used for grid layouts-->\n");
-      out.write("\n");
-      out.write("        <!-- Load jQuery and the validate plugin -->\n");
-      out.write("        <script src=\"/Onln_CV_GN/jquerylbs/jquery-19.1.js\"></script>\n");
-      out.write("        <script src=\"/Onln_CV_GN/jquerylbs/jquery.validate.min.js\"></script>\n");
-      out.write("        <!-- jQuery Form Validation code -->\n");
-      out.write("       ");
+      out.write("<link rel=\"stylesheet\" type=\"text/css\" href=\"CSS_styl/Top_Foot.css\"><!--Used for form design-->\r\n");
+      out.write("\r\n");
+      out.write("<link rel=\"stylesheet\" type=\"text/css\" href=\"CSS_styl/formBody.css\"><!--Used for form design-->\r\n");
+      out.write("<link rel=\"stylesheet\" type=\"text/css\" href=\"CSS_styl/gridLayouts.css\"><!--Used for grid layouts-->\r\n");
+      out.write("\r\n");
+      out.write("<!-- Load jQuery and java scripts files -->\r\n");
+      out.write("<script src=\"jquerylbs/jquery-19.1.js\"></script>\r\n");
+      out.write("<script src=\"jquerylbs/jquery.validate.min.js\"></script>\r\n");
+      out.write("<script src=\"jquerylbs/formValidation.js\"></script>\r\n");
+      out.write("<script src=\"jquerylbs/getAjaxObject.js\"></script>\r\n");
+      out.write("<script src=\"jquerylbs/loadUIs.js\"></script>\r\n");
+      out.write("<script src=\"jquerylbs/searchJQry.js\"></script>\r\n");
+      out.write("\r\n");
+      out.write("<!-- Load jQuery and java scripts  -->\r\n");
       out.write("\r\n");
       out.write("        ");
       out.write("<div id=\"menubar\">\n");
@@ -80,38 +94,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        </ul>\n");
       out.write("      </div>");
       out.write("\r\n");
-      out.write("         <!-- jQuery Form Validation code -->\r\n");
-      out.write("        <script>\r\n");
-      out.write("\r\n");
-      out.write("            // When the browser is ready...\r\n");
-      out.write("            $(function () {\r\n");
-      out.write("\r\n");
-      out.write("                // Setup form validation on the #register-form element\r\n");
-      out.write("                $(\"#login-form\").validate({\r\n");
-      out.write("                    // Specify the validation rules\r\n");
-      out.write("                    rules: {\r\n");
-      out.write("                        \r\n");
-      out.write("                        userEmail: {required: true, email: true},\r\n");
-      out.write("                        password: {required: true, minlength: 6},\r\n");
-      out.write("                        agree: \"required\"\r\n");
-      out.write("                    },\r\n");
-      out.write("                    // Specify the validation error messages\r\n");
-      out.write("                    messages: {\r\n");
-      out.write("                        \r\n");
-      out.write("                        userEmail: {required: \"Enter valid email for your username\"},\r\n");
-      out.write("                        password: {required: \"Field is required \"},\r\n");
-      out.write("                        agree: \"Please accept our policy\"\r\n");
-      out.write("\r\n");
-      out.write("                    },\r\n");
-      out.write("                    submitHandler: function (form) {\r\n");
-      out.write("                        form.submit();\r\n");
-      out.write("                    }\r\n");
-      out.write("                });\r\n");
-      out.write("\r\n");
-      out.write("            });\r\n");
-      out.write("\r\n");
-      out.write("        </script>\r\n");
-      out.write("        <!-- End jQuery Form Validation code -->\r\n");
+      out.write("         \r\n");
       out.write("    </head>\r\n");
       out.write("    <body>\r\n");
       out.write("        \r\n");
@@ -122,7 +105,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                       \r\n");
       out.write("\r\n");
       out.write("                        <div id=\"register\" class=\"animate form\">\r\n");
-      out.write("                            <form method=\"POST\" action=\"UserLogin?actionType=LoginUser\" novalidate id=\"login-form\">\r\n");
+      out.write("                            <form method=\"POST\" action=\"UserSigin?actionType=LoginUser\" novalidate id=\"login-form\">\r\n");
       out.write("                                <h1> Signin </h1>\r\n");
       out.write("                               \r\n");
       out.write("                                <p> \r\n");
@@ -166,6 +149,9 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("    </div>");
       out.write("\r\n");
       out.write("</html>\r\n");
+
+}
+
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){
         out = _jspx_out;

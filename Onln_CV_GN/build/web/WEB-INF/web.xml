@@ -24,6 +24,14 @@
         <servlet-name>SaveReferee</servlet-name>
         <servlet-class>com.cv_gn.controller.SaveReferee</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UserLoginNew</servlet-name>
+        <servlet-class>com.cv_gn.controller.UserLoginNew</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserSigin</servlet-name>
+        <servlet-class>com.cv_gn.controller.UserSigin</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserRegistrationController</servlet-name>
         <url-pattern>/UserRegistrationController</url-pattern>
@@ -71,6 +79,14 @@
     <servlet-mapping>
         <servlet-name>SaveReferee</servlet-name>
         <url-pattern>/SaveReferee</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserLoginNew</servlet-name>
+        <url-pattern>/UserLoginNew</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserSigin</servlet-name>
+        <url-pattern>/UserSigin</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
