@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 12, 2017 at 03:34 PM
+-- Generation Time: May 12, 2017 at 04:26 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -470,7 +470,7 @@ INSERT INTO `user` (`idUser`, `username`, `password`, `registerDate`, `idUser_ty
 (2, 'naduni@gmail.com', 'wR9m/LF9bSk=', '2017-05-06 03:49:41', 2),
 (3, 'naduni@il.com', 'WnatjqL5B1I=', '2017-05-06 03:58:37', 1),
 (4, 'john@gmail.com', '6vp7xNVrVFE=', '2017-05-07 14:12:16', 1),
-(5, 'rex@cn.com', '112233', '2017-05-11 12:20:23', 1),
+(5, 'rex@cn.com', 'iYPabC2be6I=', '2017-05-11 12:20:23', 1),
 (6, 'man@wrl.com', 'w8y/IR0jROU=', '2017-05-11 12:55:45', 1),
 (7, 'ash@gml.com', '/o2Kfj1Pifk=', '2017-05-11 13:18:58', 1);
 
